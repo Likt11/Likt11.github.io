@@ -8,7 +8,7 @@
     <link href="/2024/05/08/testpic/"/>
     <url>/2024/05/08/testpic/</url>
     
-    <content type="html"><![CDATA[<h3 id="写文章，发文章"><a href="#写文章，发文章" class="headerlink" title="写文章，发文章"></a>写文章，发文章</h3><p>修改了一下<code>_config.yaml</code>文件的<code>post_asset_folder:true</code>，这样命令<code>hexo new post &quot;文件名&quot;</code>时，不仅会生成<code>.md</code>文件，同时还有个同名文件夹，用来存储该文件中用到的图片，下面测试一下：</p><p><img src="/testpic/test.png"></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="写文章，发文章"><a href="#写文章，发文章" class="headerlink" title="写文章，发文章"></a>写文章，发文章</h3><p>修改了一下<code>_config.yaml</code>文件的<code>post_asset_folder:true</code>，这样命令<code>hexo new post &quot;文件名&quot;</code>时，不仅会生成<code>.md</code>文件，同时还有个同名文件夹，用来存储该文件中用到的图片，下面测试一下：</p><p><img src="/testpic/test.png"></p><img class="testpic&#x2F;test.png % } {% img testpic&#x2F;test.png">]]></content>
     
     
     
