@@ -19,6 +19,18 @@
 ]]></content>
   </entry>
   <entry>
+    <title>testpic</title>
+    <url>/2024/05/08/testpic/</url>
+    <content><![CDATA[<h3 id="写文章，发文章"><a href="#写文章，发文章" class="headerlink" title="写文章，发文章"></a>写文章，发文章</h3><p>修改了一下<code>_config.yaml</code>文件的<code>post_asset_folder:true</code>，这样命令<code>hexo new post &quot;文件名&quot;</code>时，不仅会生成<code>.md</code>文件，同时还有个同名文件夹，用来存储该文件中用到的图片，下面测试一下：</p>
+<p><img src="/testpic/test.png"></p>
+<img class="testpic&#x2F;test.png % } {% img testpic&#x2F;test.png">
+
+]]></content>
+      <tags>
+        <tag>testpicturex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>testblog</title>
     <url>/2024/05/08/testblog/</url>
     <content><![CDATA[<h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>git –version</p>
@@ -29,18 +41,6 @@
 <h2 id="将hexo部署到GitHub"><a href="#将hexo部署到GitHub" class="headerlink" title="将hexo部署到GitHub"></a>将hexo部署到GitHub</h2>]]></content>
       <tags>
         <tag>搭建博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>testpic</title>
-    <url>/2024/05/08/testpic/</url>
-    <content><![CDATA[<h3 id="写文章，发文章"><a href="#写文章，发文章" class="headerlink" title="写文章，发文章"></a>写文章，发文章</h3><p>修改了一下<code>_config.yaml</code>文件的<code>post_asset_folder:true</code>，这样命令<code>hexo new post &quot;文件名&quot;</code>时，不仅会生成<code>.md</code>文件，同时还有个同名文件夹，用来存储该文件中用到的图片，下面测试一下：</p>
-<p><img src="/testpic/test.png"></p>
-<img class="testpic&#x2F;test.png % } {% img testpic&#x2F;test.png">
-
-]]></content>
-      <tags>
-        <tag>testpicturex</tag>
       </tags>
   </entry>
 </search>
