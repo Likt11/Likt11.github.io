@@ -8,5 +8,5 @@ http://likt11.github.io/categories/index.html
 http://likt11.github.io/tags/index.html
 http://likt11.github.io/about/index.html
 http://likt11.github.io/
-http://likt11.github.io/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/
 http://likt11.github.io/tags/testpicturex/
+http://likt11.github.io/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/
