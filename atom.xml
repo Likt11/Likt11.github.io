@@ -6,7 +6,7 @@
   <link href="http://likt11.github.io/atom.xml" rel="self"/>
   
   <link href="http://likt11.github.io/"/>
-  <updated>2024-05-17T10:15:53.595Z</updated>
+  <updated>2024-05-17T10:21:49.668Z</updated>
   <id>http://likt11.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://likt11.github.io/2024/05/17/%E7%BD%91%E7%BB%9C%E5%B1%82%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"/>
     <id>http://likt11.github.io/2024/05/17/%E7%BD%91%E7%BB%9C%E5%B1%82%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/</id>
     <published>2024-05-17T09:50:14.000Z</published>
-    <updated>2024-05-17T10:15:53.595Z</updated>
+    <updated>2024-05-17T10:21:49.668Z</updated>
     
     
     <summary type="html">网络层学习中的一些总结</summary>
@@ -31,7 +31,11 @@
     <category term="学习记录" scheme="http://likt11.github.io/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
     
     
-    <category term="网络层 -网络层 -IP协议 -计算机网络 -RIP -OSPF -VPN -NAT" scheme="http://likt11.github.io/tags/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E7%BB%9C%E5%B1%82-IP%E5%8D%8F%E8%AE%AE-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-RIP-OSPF-VPN-NAT/"/>
+    <category term="网络层" scheme="http://likt11.github.io/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    
+    <category term="IP协议" scheme="http://likt11.github.io/tags/IP%E5%8D%8F%E8%AE%AE/"/>
+    
+    <category term="计算机网络" scheme="http://likt11.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
