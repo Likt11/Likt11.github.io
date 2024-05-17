@@ -1218,7 +1218,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffffb1;
+  background: #ff374f;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2357,6 +2357,13 @@ ul.breadcrumb li + li:last-child {
   color: #ccc;
   margin: auto;
 }
+mjx-container[jax="CHTML"][display="true"],
+.has-jax {
+  overflow: auto hidden;
+}
+mjx-container + br {
+  display: none;
+}
 .header {
   margin: 0 auto;
   position: relative;
@@ -2849,6 +2856,16 @@ body {
 .v[data-class=v] p,
 .v[data-class=v] pre code,
 .v[data-class=v] .status-bar {
+  opacity: 10;
+  color: #000;
+}
+.tag-cloud a,
+a,
+span.exturl {
+  opacity: 10;
+  color: #000;
+}
+tag-cloud-tags {
   opacity: 10;
   color: #000;
 }
