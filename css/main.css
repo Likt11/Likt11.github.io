@@ -1218,7 +1218,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #6e5240;
+  background: #ffffb1;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2787,7 +2787,7 @@ body {
   background-position: center;
 }
 .main-inner {
-  margin-top: 70px;
+  margin-top: 50px;
   padding: 20px 20px 20px 20px;
 }
 .post-block {
@@ -2807,7 +2807,7 @@ body {
   opacity: 0.9;
 }
 .comments {
-  background: rgba(255,255,255,0.7) none repeat scroll !important;
+  background: rgba(255,255,255,0.8) none repeat scroll !important;
 }
 .post {
   margin-top: 60px;
@@ -2837,6 +2837,18 @@ body {
   color: #000;
 }
 .post-body {
-  opacity: 0.8;
+  opacity: 0.95;
+  color: #000;
+}
+.v[data-class=v] .vwrap .vheader .vinput {
+  color: #000;
+  opacity: 1;
+}
+.v[data-class=v] .vinput,
+.v[data-class=v] .veditor,
+.v[data-class=v] p,
+.v[data-class=v] pre code,
+.v[data-class=v] .status-bar {
+  opacity: 10;
   color: #000;
 }
