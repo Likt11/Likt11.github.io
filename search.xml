@@ -529,4 +529,79 @@
         <tag>进程描述与控制</tag>
       </tags>
   </entry>
+  <entry>
+    <title>RsaCtfTool工具的安装</title>
+    <url>/2024/05/23/RsaCtfTool%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>本文目录</strong></p>
+<p>[toc]</p>
+<h3 id="一、安装RsaCtfTool"><a href="#一、安装RsaCtfTool" class="headerlink" title="一、安装RsaCtfTool"></a>一、<strong>安装RsaCtfTool</strong></h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/Ganapati/RsaCtfTool.git</span><br></pre></td></tr></table></figure>
+<h3 id="二、安装相应环境"><a href="#二、安装相应环境" class="headerlink" title="二、安装相应环境"></a>二、<strong>安装相应环境</strong></h3><p>​    <strong>切换目录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd RsaCtfTool</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装mpfr<strong>（依次执行下面命令）</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://www.mpfr.org/mpfr-current/mpfr-4.2.0.tar.bz2</span><br></pre></td></tr></table></figure>
+<p>（目前最新版本4.2.0）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">v=4.2.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -jxvf mpfr-$&#123;v&#125;.tar.bz2 &amp;&amp; cd mpfr-$&#123;v&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make check &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装mpc<strong>（依次执行以下命令）</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">v=1.1.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget ftp://ftp.gnu.org/gnu/mpc/mpc-$&#123;v&#125;.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf mpc-$&#123;v&#125;.tar.gz &amp;&amp; cd mpc-$&#123;v&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make check &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h3 id="三、安装python库（本文使用python3版本）"><a href="#三、安装python库（本文使用python3版本）" class="headerlink" title="三、安装python库（本文使用python3版本）"></a>三、<strong>安装python库（本文使用python3版本）</strong></h3><p>可使用命令更新</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install python3-pip</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/1.png" alt="image-20230820165207896"></p>
+<p>随后可用命令查看版本。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3 -V</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/2.png" alt="image-20230820165226251"></p>
+<h3 id="四、配置库"><a href="#四、配置库" class="headerlink" title="四、配置库"></a>四、<strong>配置库</strong></h3><ul>
+<li>切换目录（可以重开一个终端）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd RsaCtfTool</span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加路径到环境变量</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export PATH=&quot;$PATH:/home/kali/.local/bin&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装requirements.txt（此处使用镜像下载，不容易出错）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3 install -r requirements.txt -i </span><br><span class="line"> http://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装结束，使用命令：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 RsaCtfTool.py</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/3.png" alt="image-20230820174038768"></p>
+<h3 id="五、可能出现的报错及解决方法："><a href="#五、可能出现的报错及解决方法：" class="headerlink" title="五、可能出现的报错及解决方法："></a>五、<strong>可能出现的报错及解决方法：</strong></h3><ol>
+<li>安装mpc时，报错</li>
+</ol>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/4.png" alt="image-20230820164949457"></p>
+<p>出现这个错误可能是因为缺少libmpfr库或者库的版本不匹配。</p>
+<p><strong>安装命令</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo apt-get install libmpfr-dev</span><br></pre></td></tr></table></figure>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/5.png" alt="image-20230820165145475"></p>
+<p>安装成功后，随后再重新执行安装mpc的命令（如下）即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">make &amp;&amp; make check &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<ol>
+<li>安装requirements.txt时报错</li>
+</ol>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/6.png" alt="image-20230820163650133"></p>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/7.png" alt="image-20230820165018325"></p>
+<p>但只要按上述第四点<strong>配置库</strong>一步一步操作，实操是可以解决问题。</p>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/8.png" alt="image-20230820163715465"></p>
+]]></content>
+      <categories>
+        <category>一些教程</category>
+      </categories>
+      <tags>
+        <tag>ctf</tag>
+        <tag>kali</tag>
+      </tags>
+  </entry>
 </search>

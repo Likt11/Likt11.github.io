@@ -6,7 +6,7 @@
   <link href="http://likt11.github.io/atom.xml" rel="self"/>
   
   <link href="http://likt11.github.io/"/>
-  <updated>2024-05-21T08:05:55.789Z</updated>
+  <updated>2024-05-23T14:27:39.623Z</updated>
   <id>http://likt11.github.io/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RsaCtfTool工具的安装</title>
+    <link href="http://likt11.github.io/2024/05/23/RsaCtfTool%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85/"/>
+    <id>http://likt11.github.io/2024/05/23/RsaCtfTool%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85/</id>
+    <published>2024-05-23T14:25:11.000Z</published>
+    <updated>2024-05-23T14:27:39.623Z</updated>
+    
+    
+    <summary type="html">记录在kali系统中安装RsaCtfTool的历程</summary>
+    
+    
+    
+    <category term="一些教程" scheme="http://likt11.github.io/categories/%E4%B8%80%E4%BA%9B%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="ctf" scheme="http://likt11.github.io/tags/ctf/"/>
+    
+    <category term="kali" scheme="http://likt11.github.io/tags/kali/"/>
+    
+  </entry>
   
   <entry>
     <title>进程的描述与控制</title>
