@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Likt&#39;s Blog</title>
+  
+  <subtitle>天空一直都在，是云来了又去。</subtitle>
+  <link href="http://likt11.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://likt11.github.io/"/>
+  <updated>2024-05-23T14:33:44.000Z</updated>
+  <id>http://likt11.github.io/</id>
+  
+  <author>
+    <name>Likt</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RsaCtfTool工具的安装</title>
+    <link href="http://likt11.github.io/2024/05/23/RsaCtfTool%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85/"/>
+    <id>http://likt11.github.io/2024/05/23/RsaCtfTool%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AE%89%E8%A3%85/</id>
+    <published>2024-05-23T14:25:11.000Z</published>
+    <updated>2024-05-23T14:33:44.000Z</updated>
+    
+    
+    <summary type="html">记录在kali系统中安装RsaCtfTool的历程</summary>
+    
+    
+    
+    <category term="一些教程" scheme="http://likt11.github.io/categories/%E4%B8%80%E4%BA%9B%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="ctf" scheme="http://likt11.github.io/tags/ctf/"/>
+    
+    <category term="kali" scheme="http://likt11.github.io/tags/kali/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>进程的描述与控制</title>
+    <link href="http://likt11.github.io/2024/05/21/%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%8F%8F%E8%BF%B0%E4%B8%8E%E6%8E%A7%E5%88%B6/"/>
+    <id>http://likt11.github.io/2024/05/21/%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%8F%8F%E8%BF%B0%E4%B8%8E%E6%8E%A7%E5%88%B6/</id>
+    <published>2024-05-21T08:05:12.000Z</published>
+    <updated>2024-05-21T08:05:56.000Z</updated>
+    
+    
+    <summary type="html">关于进程复习时的一些记录。</summary>
+    
+    
+    
+    <category term="操作系统" scheme="http://likt11.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="进程描述与控制" scheme="http://likt11.github.io/tags/%E8%BF%9B%E7%A8%8B%E6%8F%8F%E8%BF%B0%E4%B8%8E%E6%8E%A7%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>进程同步</title>
+    <link href="http://likt11.github.io/2024/05/21/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/"/>
+    <id>http://likt11.github.io/2024/05/21/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/</id>
+    <published>2024-05-21T08:01:31.000Z</published>
+    <updated>2024-05-21T08:04:16.000Z</updated>
+    
+    
+    <summary type="html">关于进程同步复习时的一些记录。</summary>
+    
+    
+    
+    <category term="操作系统" scheme="http://likt11.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="进程同步" scheme="http://likt11.github.io/tags/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动态分区存储管理实验</title>
+    <link href="http://likt11.github.io/2024/05/18/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E9%AA%8C/"/>
+    <id>http://likt11.github.io/2024/05/18/%E5%8A%A8%E6%80%81%E5%88%86%E5%8C%BA%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86%E5%AE%9E%E9%AA%8C/</id>
+    <published>2024-05-17T16:00:18.000Z</published>
+    <updated>2024-05-21T08:08:20.000Z</updated>
+    
+    
+    <summary type="html">记一次操作系统实验报告，待更新中~</summary>
+    
+    
+    
+    <category term="操作系统" scheme="http://likt11.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="存储管理" scheme="http://likt11.github.io/tags/%E5%AD%98%E5%82%A8%E7%AE%A1%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络层基础总结</title>
+    <link href="http://likt11.github.io/2024/05/17/%E7%BD%91%E7%BB%9C%E5%B1%82%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/"/>
+    <id>http://likt11.github.io/2024/05/17/%E7%BD%91%E7%BB%9C%E5%B1%82%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93/</id>
+    <published>2024-05-17T09:50:14.000Z</published>
+    <updated>2024-05-17T14:25:30.000Z</updated>
+    
+    
+    <summary type="html">网络层学习中的一些总结</summary>
+    
+    
+    
+    <category term="学习记录" scheme="http://likt11.github.io/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="网络层" scheme="http://likt11.github.io/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    
+    <category term="IP协议" scheme="http://likt11.github.io/tags/IP%E5%8D%8F%E8%AE%AE/"/>
+    
+    <category term="计算机网络" scheme="http://likt11.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+</feed>
