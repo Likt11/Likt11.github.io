@@ -832,4 +832,95 @@
         <tag>进程描述与控制</tag>
       </tags>
   </entry>
+  <entry>
+    <title>路由交换技术实验</title>
+    <url>/2024/07/17/%E8%B7%AF%E7%94%B1%E4%BA%A4%E6%8D%A2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h2><p>第一章  计算机网络基础</p>
+<p>第二章  校园网项目设计与子项目分解</p>
+<p>第三章  思科网络设备与操作系统</p>
+<h2 id="二、路由器——路由协议"><a href="#二、路由器——路由协议" class="headerlink" title="二、路由器——路由协议"></a>二、路由器——路由协议</h2><p>第四章  路由选择原理与静态路由协议——静态路由</p>
+<p>第五章  路由信息协议与配置方法——RIP</p>
+<p>第六章  增强型内部网关路由协议与配置方法——EIGRP</p>
+<p>第七章  开放式最短路径优先协议与配置方法——OSPF</p>
+<h2 id="三、交换机"><a href="#三、交换机" class="headerlink" title="三、交换机"></a>三、交换机</h2><p>第八章  交换技术与交换机配置方法</p>
+<p>第九章 VLAN、Trunk、VTP协议与配置方法</p>
+<p>第十章 VLAN间路由与配置方法</p>
+<h2 id="四、网络——访问控制、地址转换"><a href="#四、网络——访问控制、地址转换" class="headerlink" title="四、网络——访问控制、地址转换"></a>四、网络——访问控制、地址转换</h2><p>第十一章  访问控制列表与配置方法</p>
+<p>第十二章  网络地址转换与配置方法</p>
+<h2 id="重点实验复习"><a href="#重点实验复习" class="headerlink" title="重点实验复习"></a>重点实验复习</h2><h4 id="IOS基础命令"><a href="#IOS基础命令" class="headerlink" title="IOS基础命令"></a>IOS基础命令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">no ip domain lookup		关闭DNS查询，或者一旦进入查询使用快捷键：CTRL+shift+6</span><br><span class="line">line console 0		进入主控制线路模式</span><br><span class="line">logging synchronous		关闭日志消息</span><br><span class="line">exec-time 0 0  设置为永不超时</span><br></pre></td></tr></table></figure>
+<p>接口：serial串行接口、快速以太网接口f/g、逻辑接口环回接口loopback,lo—默认开启</p>
+<p>description命令对接口设置描述</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">int f0/0</span><br><span class="line">description connect to router2</span><br></pre></td></tr></table></figure>
+<p>show命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show interface或后面直接跟上具体的接口号</span><br><span class="line">show controllers serial查看特定接口的硬件信息</span><br><span class="line">show clock</span><br><span class="line">show hosts</span><br><span class="line">show history</span><br><span class="line">show flash查看</span><br><span class="line">show version</span><br><span class="line">show arp</span><br><span class="line">show protocol</span><br><span class="line">show ip int brief</span><br><span class="line">show ip route</span><br><span class="line">show startup-configuration查看存储在非易失性存储器的配置文件</span><br><span class="line">show running-configuration查看存储在内存中的当前配置文件</span><br></pre></td></tr></table></figure>
+<p>连通性测试</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ping 2.2.2.2</span><br><span class="line">ping 2.2.2.2 source 1.1.1.1</span><br><span class="line">traceroute 2.2.2.2</span><br></pre></td></tr></table></figure>
+<h4 id="思科发现协议CDP"><a href="#思科发现协议CDP" class="headerlink" title="思科发现协议CDP"></a>思科发现协议CDP</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">show cdp</span><br><span class="line">show cdp nei</span><br><span class="line">show cdp neighbors detail</span><br></pre></td></tr></table></figure>
+<p>禁用cdp服务</p>
+<ol>
+<li><p>全局禁用cdp</p>
+<p>no cdp run</p>
+</li>
+<li><p>接口禁用</p>
+<p>cdp run   重新启用CDP服务</p>
+<p>int s0/0/1</p>
+<p>no cdp enable  该接口禁用CDP</p>
+<p>exit</p>
+</li>
+</ol>
+<h4 id="路由器配置默认网关"><a href="#路由器配置默认网关" class="headerlink" title="路由器配置默认网关"></a>路由器配置默认网关</h4><p>为了便于测试，经常使用路由器充当临时端系统（主机），需要为其配置默认网关。</p>
+<p>首先关闭其路由功能，使其暂时失去路由能力，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">no ip routing关闭路由功能</span><br><span class="line">int f0/0</span><br><span class="line">ip add 192.168.1.1 255.255.255.0</span><br><span class="line">no shutdown</span><br><span class="line">exit</span><br><span class="line">ip default-gateway 192.168.1.254 设置默认网关</span><br><span class="line">show ip route可以查看到网关信息</span><br></pre></td></tr></table></figure>
+<h3 id="路由选择原理"><a href="#路由选择原理" class="headerlink" title="路由选择原理"></a>路由选择原理</h3><p>路由器的主要功能：路由选择和数据转发</p>
+<p>选择路由的原则：①子网掩码最长②管理距离最小优先（ARP 120,EIGRP 90,OSPF 110）③度量值最小优先原则（带宽越大、度量值越小）</p>
+<p>拆包、查表、重装、转发</p>
+<p>管理距离AD用来衡量<strong>路由选择信息的可信度和路由协议的可靠性</strong>：数值越小，AD越小，可信度越高。直连路由0，静态路由1</p>
+<p>度量值用来衡量同意路由协议下路径的可信度。跳计数、带宽、延时、可靠性。（rip是跳数，ospf是cost即带宽，</p>
+<p>动态路由协议可以分为三类如下：</p>
+<p>①距离矢量路由协议：RIP,IGRP</p>
+<p>②链路状态路由协议：OSPF</p>
+<p>③混合型协议：EIGRP</p>
+<p>有类路由协议：路由更新广播中不携带相关网络的子网掩码信息，在网络边界按标准的网络类别ABC发生自动汇总,如:RIP v1，IGRP</p>
+<p>无类路由协议：更新广播中携带相关网络的子网掩码信息还支持VLSM信息，如：RIP v2，EIGRP，OSPF</p>
+<h3 id="静态路由协议"><a href="#静态路由协议" class="headerlink" title="静态路由协议"></a>静态路由协议</h3><p>配置语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ip route 192.168.12.0 255.255.255.0 192.168.1.2	下一跳地址</span><br><span class="line">ip route 192.168.12.0 255.255.255.0 s0/0/1 本路由器出站地址</span><br></pre></td></tr></table></figure>
+<p>配置静态路由时，如果路由器接口为：以太网环境即以太网接口 时，配置下一跳地址为优选；</p>
+<p>如果在串行链路环境即串行接口 时，配置本地出接口，更高效。</p>
+<h3 id="默认路由协议"><a href="#默认路由协议" class="headerlink" title="默认路由协议"></a>默认路由协议</h3><p>Stub网络，末端网络，末梢网络，仅有一台边界路由器连接到外面的其他子网，或者仅有一个通路连接到其他网络。在stub网络中，一般使用使用一条默认路由指向外网。</p>
+<p>默认路由是特殊的静态路由，保底用的</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ip route 0.0.0.0 0.0.0.0 s0/0/1</span><br><span class="line">ip route 0.0.0.0 0.0.0.0 192.168.1.2</span><br></pre></td></tr></table></figure>
+<h3 id="浮动静态路由"><a href="#浮动静态路由" class="headerlink" title="浮动静态路由"></a>浮动静态路由</h3><p>特殊的静态路由，用于路由器到达目的子网有多个出口的环境，可以进行路由冗余以提高网络可靠性。</p>
+<p>浮动静态路由通过配置一个比主路由的管理距离更大的静态路由，保证当网络拓扑结构或者链路状态发生变化导致主路由失效时，提供备份路由，从而实现链路的备份。当主路由存在的情况下，备份路由不会出现在路由表中。</p>
+<p>即启用AD这个参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ip route 192.168.1.0 255.255.255.0 172.16.3.1 10即该路由的管理距离AD为10</span><br></pre></td></tr></table></figure>
+<h3 id="路由信息协议与配置方法"><a href="#路由信息协议与配置方法" class="headerlink" title="路由信息协议与配置方法"></a>路由信息协议与配置方法</h3><p>Routing Information Protocol  即 RIP 协议，是典型的距离矢量路由选择协议</p>
+<p>15跳以内的中小型网络</p>
+<p>使得v1，v2版本兼容的命令如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ip rip send version 1/2</span><br><span class="line">ip rip receive version 1/2</span><br></pre></td></tr></table></figure>
+<p>RIP v1：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router rip</span><br><span class="line">version 1</span><br><span class="line">network 网络地址[不携带子网掩码，不支持VLSM，默认ABC三类]如若是10.136.10.0/24，v1版本中其为A类地址声明如下</span><br><span class="line">network 10.0.0.0 </span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>RIP v2:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router rip</span><br><span class="line">version 2</span><br><span class="line">network 网络地址[携带子网掩码，支持VLSM]如若是10.136.10.0/24，v2版本中声明如下</span><br><span class="line">network 10.136.10.0</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<h4 id="RIP-v2认证方法：见教材P106"><a href="#RIP-v2认证方法：见教材P106" class="headerlink" title="RIP v2认证方法：见教材P106"></a>RIP v2认证方法：见教材P106</h4><h4 id="RIP汇总："><a href="#RIP汇总：" class="headerlink" title="RIP汇总："></a>RIP汇总：</h4><p>RIPv1默认自动汇总，不可以手动开启和关闭；RIP v2默认自动汇总但是可以手动开启和关闭，也可以配置手动汇总</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router rip</span><br><span class="line">no auto-summary</span><br><span class="line">int s0/0/1</span><br><span class="line">ip summary-address rip&#123;汇总IP 与 掩码&#125;</span><br><span class="line">手动汇总在接口模式下启用：</span><br><span class="line">int s0/0/0</span><br><span class="line">ip summary-address rip 4.4.0.0 255.255.252.0</span><br></pre></td></tr></table></figure>
+<p>show ip protocols</p>
+<p>debug ip rip</p>
+<p>clear ip route *  清除各路由器上的路由表</p>
+<p>timers basic 60 360 360 480  更改RIP路由协议定时器，默认是30，180，180，240</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router rip</span><br><span class="line">timers basic 60 360 360 480</span><br><span class="line">no timers basic恢复定时器默认值</span><br></pre></td></tr></table></figure>
+<h3 id="增强型内部网关路由协议与配置方法"><a href="#增强型内部网关路由协议与配置方法" class="headerlink" title="增强型内部网关路由协议与配置方法"></a>增强型内部网关路由协议与配置方法</h3><p>EIGRP（enhanced interior gateway routing protocol）</p>
+<p>具有距离矢量路由协议的特点，最大支持255跳路由，极大扩展了网络规模，还兼有链路状态路由协议的特点，可以迅速构建逻辑无环结构，实现快速收敛。</p>
+<p>时间不够先总结一下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router eigrp [自治系统号]</span><br><span class="line">network [目标网络地址][通配符掩码]</span><br></pre></td></tr></table></figure>
+<p>如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router eigrp 100</span><br><span class="line">network 192.168.1.0 0.0.0.255</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>总结了部分课本中的实验，方便理解记忆相关的命令……</strong></p>
+]]></content>
+      <categories>
+        <category>学习记录</category>
+      </categories>
+      <tags>
+        <tag>路由交换技术</tag>
+      </tags>
+  </entry>
 </search>
