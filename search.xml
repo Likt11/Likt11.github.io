@@ -67,7 +67,7 @@
 <p>【其实这个是挺久之前安装过程记录下来的，所以一些版本可能有更新！】</p>
 ]]></content>
       <categories>
-        <category>一些教程</category>
+        <category>技术文档</category>
       </categories>
       <tags>
         <tag>ctf</tag>
@@ -295,7 +295,7 @@
 <p><strong>写在最后：</strong>其实搭建过程相对较简单，但是我花了好久:fist_oncoming:，希望这篇博客可以帮到每一个深陷困境的大家！</p>
 ]]></content>
       <categories>
-        <category>一些教程</category>
+        <category>技术文档</category>
       </categories>
       <tags>
         <tag>区块链</tag>
@@ -319,6 +319,7 @@
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
+        <category>学习记录</category>
         <category>操作系统</category>
       </categories>
       <tags>
@@ -341,6 +342,7 @@
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
+        <category>学习记录</category>
         <category>操作系统</category>
       </categories>
       <tags>
@@ -803,6 +805,7 @@
 ]]></content>
       <categories>
         <category>学习记录</category>
+        <category>计算机网络</category>
       </categories>
       <tags>
         <tag>网络层</tag>
@@ -826,6 +829,7 @@
 </div>
 <script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
+        <category>学习记录</category>
         <category>操作系统</category>
       </categories>
       <tags>
@@ -918,6 +922,7 @@
 ]]></content>
       <categories>
         <category>学习记录</category>
+        <category>路由交换技术</category>
       </categories>
       <tags>
         <tag>路由交换技术</tag>
