@@ -914,7 +914,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router eigrp [自治系统号]</span><br><span class="line">network [目标网络地址][通配符掩码]</span><br></pre></td></tr></table></figure>
 <p>如：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">router eigrp 100</span><br><span class="line">network 192.168.1.0 0.0.0.255</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p><strong>总结了部分课本中的实验，方便理解记忆相关的命令……</strong></p>
+<p><strong>复习的时候暂时只记录到这里……</strong></p>
 ]]></content>
       <categories>
         <category>学习记录</category>
