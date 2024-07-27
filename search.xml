@@ -1135,7 +1135,18 @@
   <entry>
     <title>栈、队列及其应用</title>
     <url>/2024/07/21/%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    <content><![CDATA[<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="74a1d9e51f527e02a230a9ac8d11b243e4f3f67ecd3aa9007f5fe0833b55f3bd">2d2cf6304020b54bb66415a4ddd063459cd4fafaa407e53e5674e5333c327f87f5b7d22d86e1124c0f0f6241299f49e28bac191bbf896432de354b4993ab5a066ab00878da2fba5f9d2887d0e856a5e6daa29b03b9e9db64a2bf51d2165b671fe910f74e77dea4e8fc19d50d39a8aab4637697a15240beac1aab5c55f032f284931721029cc664db278a3c55591c362fcd9445e9ac07f554acde9e8fb53417e09f426b4ea80c68dce13f711328a670d1b68cb8060235e2925142b527322e8d77fd280f501de223fa2d97cdc4a9457e477c6857a000b4f7704c81a89466013ebb</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
       <categories>
         <category>学习记录</category>
         <category>数据结构</category>
