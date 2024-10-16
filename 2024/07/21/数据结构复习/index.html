@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="KRqm7Lu_cZK-ZkctKdb9ybG_kBgFXWDh41mUPXdJNd8">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="codeva-KIwwTfWo4R">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"likt11.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownBigOut"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="复习时做的一点笔记，希望以后会有用到它的地方！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《数据结构C语言版》期末复习">
+<meta property="og:url" content="http://likt11.github.io/2024/07/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Likt&#39;s Blog">
+<meta property="og:description" content="复习时做的一点笔记，希望以后会有用到它的地方！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-21T04:04:32.000Z">
+<meta property="article:modified_time" content="2024-07-22T13:13:33.368Z">
+<meta property="article:author" content="Likt">
+<meta property="article:tag" content="总结">
+<meta property="article:tag" content="复习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://likt11.github.io/2024/07/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>《数据结构C语言版》期末复习 | Likt's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Likt's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Likt's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天空一直都在，是云来了又去。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://likt11.github.io/2024/07/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Likt">
+      <meta itemprop="description" content="请你务必，一而再，再而三，三而不竭，千次万次，毫不犹豫地救自己于这世间水火。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Likt's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《数据结构C语言版》期末复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-21 12:04:32" itemprop="dateCreated datePublished" datetime="2024-07-21T12:04:32+08:00">2024-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-07-22 21:13:33" itemprop="dateModified" datetime="2024-07-22T21:13:33+08:00">2024-07-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2024/07/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="《数据结构C语言版》期末复习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2024/07/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/07/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>25 分钟</span>
+            </span>
+            <div class="post-description">复习时做的一点笔记，希望以后会有用到它的地方！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="第一章-绪论"><a href="#第一章-绪论" class="headerlink" title="第一章 绪论"></a>第一章 绪论</h2><h3 id="1-1什么是数据结构"><a href="#1-1什么是数据结构" class="headerlink" title="1.1什么是数据结构"></a>1.1什么是数据结构</h3><p><strong>数据结构是一门研究非数值计算的程序设计问题中的计算机的操作对象以及他们之间的关系和操作等的学科。</strong></p>
+<h3 id="1-2基本概念和术语"><a href="#1-2基本概念和术语" class="headerlink" title="1.2基本概念和术语"></a>1.2基本概念和术语</h3><p><strong>数据</strong>是对客观事物的符号表示，在计算机科学中是指所有能输入到计算机中并被计算机程序处理的符号的总称。</p>
+<p><strong>数据元素</strong>是数据的基本单位，在计算机程序中通常作为一个整体进行考虑和处理。一个数据元素可有若干个数据项组成。数据项是数据的不可分割的最小单位。</p>
+<p><strong>数据对象</strong>是性质相同的数据元素的集合，是数据的一个子集。</p>
+<p><strong>数据结构</strong>是相互之间存在一种或多种特定关系的数据元素的集合。</p>
+<p><strong>结构</strong>：数据元素相互之间的关系</p>
+<p><strong>四种基本结构：</strong></p>
+<ul>
+<li>集合：同属于一个集合</li>
+<li>线性结构：结构中的数据元素之间存在一个对一个的关系。</li>
+<li>树形结构：结构中的数据元素之间尽一个对多个的关系。</li>
+<li>图状结构或网状结构：结构中的数据元素之间存在多个对多个的关系。</li>
+</ul>
+<p>因此<strong>数据结构的形式定义</strong>：是一个二元组，数据元素的有限集+数据元素关系的有限集。</p>
+<p><strong>在计算机中称二进制位串为 元</strong>素或结点，当数据元素由若干数据项组成时，位串 中对应于各个数据项的子位串 称为数据域，因此元素或结点可看成是数据元素在计算机中的映像。</p>
+<p><strong>数据元素之间的关系在计算机中有两种不同的表示方法</strong>：</p>
+<ul>
+<li>顺序映像：借助元素在存储器中的相对位置来表示数据元素之间的逻辑关系         得到——》顺序存储结构</li>
+<li>非顺序映像：借助指示元素存储地址的指针 表示元素之间的 逻辑关系    得到——》链式存储结构</li>
+</ul>
+<p><strong>数据类型</strong>：是一个值的集合和定义在这个值集上的一组操作的总称。可分为两类：①非结构的原子类型——不可分解，例如C语言中的基本类型。②结构类型——的值是由若干个成分按某种结构组成的，因此可以分解。</p>
+<p>某种意义上，数据结构是“一组具有有相同结构的值“，则结构类型是”由一种数据结构和定义在其上的一组操作组成“。</p>
+<p>抽象数据类型：ADT是指一个数学模型以及定义在改模型上的一组操作。抽象数据类型的定义进取决于它的一组逻辑特性，与其在计算机内部如何表示和实现无关。</p>
+<p>原子类型</p>
+<p>固定聚合类型</p>
+<p>可变聚合类型：构成可变聚合类型的值 的成分的数目是不确定，</p>
+<p>（后两种类型可统称为 结构类型）</p>
+<p>操作类型三元组定义：</p>
+<p>数据对象（定义了关系运算的某个集合），数据关系，基本操作</p>
+<p>多形数据类型：是指其值的成分不确定的数据类型。（具有相同的数学抽象特性）</p>
+<h3 id="1-3抽象数据类型的表现与实现"><a href="#1-3抽象数据类型的表现与实现" class="headerlink" title="1.3抽象数据类型的表现与实现"></a>1.3抽象数据类型的表现与实现</h3><p>对本书语言作简要说明：</p>
+<ol>
+<li>预定义常量和类型<ol>
+<li>函数结果状态代码：true1，false0，OK1，error0，infeasible-1，overflow2；</li>
+<li>status  是函数的类型，其值是函数结果状态代码：typedef int status</li>
+</ol>
+</li>
+<li>数据结构的表示（存储结构）用类型定义（typedef）描述</li>
+<li>基本操作的算法 形式：注意形参表中，以&amp;打头的参数即为引用参数</li>
+<li>赋值语句有：简单赋值，串联赋值，成组赋值，交换赋值，条件赋值</li>
+<li>选择语句有：if，else，Switch（case）</li>
+<li>循环语句有：for，while，do-while</li>
+<li>结束语句有：函数结束语句（return 表达式； return；）case结束语句：break；，异常结束语句：exit(异常代码);</li>
+<li>输入输出语句：scanf，printf</li>
+<li>注释</li>
+<li>基本函数：max，min，abs()求绝对值，floor()求不足整数值，ceil()求进位整数值，eof()判定文件结束，eoln()判定行结束</li>
+<li>逻辑运算约定：&amp;&amp;短路与，||短路或</li>
+</ol>
+<h3 id="1-4算法和算法分析"><a href="#1-4算法和算法分析" class="headerlink" title="1.4算法和算法分析"></a>1.4算法和算法分析</h3><p>算法：是对特定问题求解步骤的一个描述，它是指令的有限序列，其中每一条指令表示一个或多个操作。</p>
+<p>五个重要特性：</p>
+<ul>
+<li>有穷性：有穷步，每一步有穷时间</li>
+<li>确定性：每条指令有确切含义，任何条件下，算法只有唯一执行路径。</li>
+<li>可行性：</li>
+<li>输入</li>
+<li>输出</li>
+</ul>
+<p>一个好的算法：</p>
+<ul>
+<li>正确性：4个层次</li>
+<li>可读性：算法主要是为了阅读交流，其次是机器执行</li>
+<li>健壮性：当输入数据非法时，算法也能适当做出反应或进行处理，而不会产生莫名其妙的输出结果。</li>
+<li>效率与低存储量需求</li>
+</ul>
+<p>效率算法的度量：</p>
+<ul>
+<li>事后统计</li>
+<li>事前分析估算</li>
+</ul>
+<p>一个算法是由控制结构（顺序，分支，循环三种）和源操作（指固有数据类型的操作）构成，则算法时间 取决于两者的综合效果。</p>
+<p>一般情况下，算法中基本操作重复执行的次数是问题规模n的某个函数f(n)，算法的时间度量记作：</p>
+<p>T(n)=O(f(n))</p>
+<p>它表示随问题规模n的增大，算法执行时间的增长率和f(n)的增长率相同，称作算法的渐进时间复杂度，简称时间复杂度。</p>
+<p>语句的频度是指 该语句重复执行的次数。</p>
+<p>时间复杂度 ：无特别指明，一般是指最坏情况下的时间复杂度。</p>
+<p><strong>算法的存储空间需求：</strong></p>
+<p>以 空间复杂度 作为算法所需要的存储空间的量度。</p>
+<p>S(n)=O(f(n))</p>
+<p>其中n为问题的规模（或大小），一个上机执行的程序除了需要存储空间来寄存本身所用指令、常量、变量和输入数据外，也需要对数据进行操作的工作单元和存储一些为实现计算所需信息的辅助空间。</p>
+<p>若额外空间相对于输入数据量来说是常数，则称次算法为 原地工作。此时，S(n)=O(1);</p>
+<h3 id="本章习题"><a href="#本章习题" class="headerlink" title="本章习题"></a>本章习题</h3><p>1.在数据结构中，从逻辑上可以把数据结构分成（ C ）。</p>
+<p>A．动态结构和静态结构   B．紧凑结构和非紧凑结构</p>
+<p><strong>C．线性结构和非线性结构</strong>  D．内部结构和外部结构</p>
+<p>4.以下说法正确的是（  D ）。</p>
+<p>A．数据元素是数据的最小单位</p>
+<p>B．数据项是数据的基本单位</p>
+<p>C．数据结构是带有结构的各数据项的集合</p>
+<p>D．一些表面上很不相同的数据可以有相同的逻辑结构</p>
+<p> <strong>数据元素是数据的基本单位</strong>。    <strong>数据项是数据的不可分割的最小单位。</strong></p>
+<p>6.以下数据结构中，（A）是非线性数据结构</p>
+<p><strong>A．树</strong>     B．字符串    C．队      D．栈</p>
+<p>5.以下与数据的存储结构无关的术语是（ C ）。</p>
+<p>A．顺序队列    B. 链表    <strong>C. 有序表</strong>     D.  链栈</p>
+<h2 id="第二章-线性表"><a href="#第二章-线性表" class="headerlink" title="第二章 线性表"></a>第二章 线性表</h2><p>线性结构的特点：在数据元素的非空有限集中，①存在唯一的一个被称作“第一个”的数据元素。②存在唯一一个别称作“最后一个”的数据元素。③④除第一个之外，集合中的每一个数据元素均只有一个前驱，只有一个后继</p>
+<h3 id="线性表的类型定义"><a href="#线性表的类型定义" class="headerlink" title="线性表的类型定义"></a>线性表的类型定义</h3><p>线性表是最常用且最简单的一种数据结构。一个线性表 是N个数据元素的有限序列。稍微复杂的线性表中，一个数据元素可以由若干个数据项组成，在这种情况下，常把数据元素称为记录，含有大量记录的线性表又称文件。</p>
+<p>同一线性表 中的元素必定有相同特性，即属 同一数据对象，相邻数据元素之间存在着序偶关系。</p>
+<p>直接前驱元素，直接后继元素。</p>
+<p>线性表中每个数据元素都有一个确定的位置，如a<sub>1</sub>是第一个数据元素，a<sub>i</sub>是第i个数据元素，因此i称为数据元素a<sub>i</sub>在线性表中的位序。</p>
+<p>线性表是一个相当灵活的数据结构，对其数据元素可以进行访问，插入，删除等操作。</p>
+<p>抽象数据类型线性表的定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ADT List&#123;</span><br><span class="line">	数据对象：</span><br><span class="line">	数据关系：</span><br><span class="line">	基本操作：</span><br><span class="line">		构造</span><br><span class="line">		销毁</span><br><span class="line">		置空</span><br><span class="line">		判空</span><br><span class="line">		取元素</span><br><span class="line">		定位元素</span><br><span class="line">		插入</span><br><span class="line">		删除</span><br><span class="line">		遍历</span><br><span class="line">		……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="例2-1：合并两个线性表"><a href="#例2-1：合并两个线性表" class="headerlink" title="例2-1：合并两个线性表"></a>例2-1：合并两个线性表</h5><p>算法思想：遍历LB，将所有在线性表B中，但不在线性表A中的数据元素插入到线性表A中。</p>
+<h5 id="例2-2：-已知LA和LB中的数据元素按值非递减有序排列，现要求将LA和LB归并为一个新的线性表LC，且LC中的数据元素扔按值非递减有序排列"><a href="#例2-2：-已知LA和LB中的数据元素按值非递减有序排列，现要求将LA和LB归并为一个新的线性表LC，且LC中的数据元素扔按值非递减有序排列" class="headerlink" title="例2-2： 已知LA和LB中的数据元素按值非递减有序排列，现要求将LA和LB归并为一个新的线性表LC，且LC中的数据元素扔按值非递减有序排列"></a>例2-2： 已知LA和LB中的数据元素按值非递减有序排列，现要求将LA和LB归并为一个新的线性表LC，且LC中的数据元素扔按值非递减有序排列</h5><p>算法：设两个指针i和j分别指向LA和LB中的某个元素，显然指针i，j的初值均为1，假设i指向a,j指向b，插入c，则：c=a&gt;b?b:a;</p>
+<p>当LA和LB中有一个线性表已经遍历结束，则对另外一个线性表的剩余元素采取插入到线性表LC中即可。</p>
+<h3 id="2-2线性表的顺序表示和实现"><a href="#2-2线性表的顺序表示和实现" class="headerlink" title="2.2线性表的顺序表示和实现"></a>2.2线性表的顺序表示和实现</h3><p>线性表的线性表示是指 用一组地址连续的存储单元依次存储线性表的数据元素。</p>
+<p>LOC(a1)是线性表的第一个数据元素a1的存储地址，通常称为线性表的起始位置或基地址。（每个元素需要占有L个存储单元）</p>
+<p>线性表的这种机内表示称作线性表的顺序存储结构或顺序映像。通常称这种存储结构的线性表为顺序表。 （以元素在计算机内的“物理位置相邻”来表示线性表中数据元素之间的逻辑关系）<strong>故线性表的顺序存储结构是一种随机存取的存储结构。</strong></p>
+<p>通常用数组来描述数据结构中的顺序存储结构，线性表长度可变，采用动态内存分配。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line">	ElemType *elem;//指示线性表的基地址</span><br><span class="line">	int length;//指示线性表的当前长度。</span><br><span class="line">	int listsize;//指示顺序表当前分配的存储空间大小，一旦插入元素而空间不足时，可进行再分配。</span><br><span class="line">&#125;SqList;</span><br><span class="line"></span><br><span class="line">L.elem=(ElemType*)malloc(LIST_INIT_SIZE*sizeof(ElemType));</span><br><span class="line">L.length=0;//空表长度为0</span><br><span class="line">L.listsize=LIST_INIT_SIZE;//初始存储空间。</span><br></pre></td></tr></table></figure>
+<h5 id="算法2-3：在线性表的第i-1个数据元素和第i个数据元素之间插入一个新的数据元素"><a href="#算法2-3：在线性表的第i-1个数据元素和第i个数据元素之间插入一个新的数据元素" class="headerlink" title="算法2.3：在线性表的第i-1个数据元素和第i个数据元素之间插入一个新的数据元素"></a>算法2.3：在线性表的第i-1个数据元素和第i个数据元素之间插入一个新的数据元素</h5><p>算法：在第i(1≤i≤n)个元素之间插入一个元素时，需将第n至第i(共n-i+1)个元素向后移动一个位置。</p>
+<p>①要判断插入的位置i是否合理，</p>
+<p>②要判断存储空间是否已满，若满则进行增加分配<code>(ElemType*)realloc(L.elem,(L.listsize+LISTINCREMENT)*sizeof(ElemType));</code></p>
+<p>③将插入位置及之后的元素后移。</p>
+<h5 id="算法2-4线性表的删除操作"><a href="#算法2-4线性表的删除操作" class="headerlink" title="算法2.4线性表的删除操作"></a>算法2.4线性表的删除操作</h5><p>算法：删除第i(1≤i≤n)个元素时需将从第i+1至第n(共n-i)个元素依次向前移动一个位置。</p>
+<p>①要判断需删除的位置i是否合法，若合法，则返回其值，<code>p=&amp;(L.elem[i-1])</code></p>
+<p>;<code>e=*p;</code>;<code>q=L.elem+L.length-1</code>其中：p为被删除元素的位置，将被删除元素的值赋给e，用q表示表尾元素的位置。②而后可对被删除元素之后的元素左移。</p>
+<h5 id="算法2-5-在顺序存储结构的线性表中插入或删除一个数据元素，平均移动表中一半元素，若表长为n，则4-3算法的时间复杂度均为O-n"><a href="#算法2-5-在顺序存储结构的线性表中插入或删除一个数据元素，平均移动表中一半元素，若表长为n，则4-3算法的时间复杂度均为O-n" class="headerlink" title="算法2.5 在顺序存储结构的线性表中插入或删除一个数据元素，平均移动表中一半元素，若表长为n，则4,3算法的时间复杂度均为O(n)"></a>算法2.5 在顺序存储结构的线性表中插入或删除一个数据元素，平均移动表中一半元素，若表长为n，则4,3算法的时间复杂度均为O(n)</h5><h5 id="算法2-6-顺序表的合并"><a href="#算法2-6-顺序表的合并" class="headerlink" title="算法2.6 顺序表的合并"></a>算法2.6 顺序表的合并</h5><h5 id="算法2-7-元素赋值，时间复杂度为O-La-length-Lb-length"><a href="#算法2-7-元素赋值，时间复杂度为O-La-length-Lb-length" class="headerlink" title="算法2.7  元素赋值，时间复杂度为O(La.length+Lb.length)"></a>算法2.7  元素赋值，时间复杂度为O(La.length+Lb.length)</h5><h3 id="2-3-线性表的链式表示和实现"><a href="#2-3-线性表的链式表示和实现" class="headerlink" title="2.3 线性表的链式表示和实现"></a>2.3 线性表的链式表示和实现</h3><p>链式存储结构 不要求逻辑上相邻的元素在物理位置上也相邻，因此它没有顺序存储结构所具有的弱点，但同时也失去了顺序表可随机存取的优点。</p>
+<h4 id="2-3-1线性链表"><a href="#2-3-1线性链表" class="headerlink" title="2.3.1线性链表"></a>2.3.1线性链表</h4><p><strong>线性表的链式存储结构的特点</strong>是用一组任意的存储单元存储线性表的数据元素（这组存储单元可以是连续的，也可以是不连续的）。</p>
+<p>因此对于数据元素ai来说，除了存储其本身的信息之外，还需存储一个指示其直接后继的信息（即直接后继的存储位置）。这两部分信息组成数据元素ai的存储映像，称为<strong>结点</strong>。它包括两个域：其中存储数据元素信息的域称为 <strong>数据域</strong>；存储直接后继存储位置的域称为<strong>指针域</strong>。指针域中存储的信息称作指针或链。n个结点链接成一个链表，即为线性表的<strong>链式存储结构</strong>。</p>
+<p>头指针 指示链表中第一个结点（即第一个数据元素的存储映像）的存储位置。</p>
+<p>逻辑上相邻的数据元素并不要求其物理位置紧邻，由此，这种存储结构为<strong>非顺序映像或链式映像</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//线性表的单链表存储结构</span><br><span class="line">typedef struct LNode&#123;</span><br><span class="line">	ElemType data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line">//在单链表的第一个结点之前附设一个结点，称之为头结点。头结点的数据域可以不存储任何信息，也可存储线性表的长度类的信息。头结点的指针域存储指向第一个结点的指针（即第一个元素结点的存储位置）</span><br><span class="line">//此时，单链表的头指针指向头结点。</span><br><span class="line">//若线性表为空表，则头结点的指针域为空，</span><br></pre></td></tr></table></figure>
+<p>在单链表中，取得第i个数据元素必须从头指针出发寻找，因此，单链表是 ：非随机存取的存储结构。</p>
+<h5 id="算法2-8在单链表中插入一个数据元素"><a href="#算法2-8在单链表中插入一个数据元素" class="headerlink" title="算法2.8在单链表中插入一个数据元素"></a>算法2.8在单链表中插入一个数据元素</h5><p>在a,b之间插入数据元素x。①首先生成一个数据域为x的结点，②然后插入到单链表中。③需要修改a结点中的指针域，使其指向结点x④使得结点x的指针域指向结点b</p>
+<p>设s为指向结点x的指针，p为单链表中指向结点a的指针，则：</p>
+<p><code>s-&gt;next=p-&gt;next;    p-&gt;next=s;</code></p>
+<h5 id="算法2-9在单链表中删除一个数据元素"><a href="#算法2-9在单链表中删除一个数据元素" class="headerlink" title="算法2.9在单链表中删除一个数据元素"></a>算法2.9在单链表中删除一个数据元素</h5><p>a,b,c   要求删除结点b。则需要 修改结点a的指针域。</p>
+<p><code>p-&gt;next=p-&gt;next-&gt;next;</code></p>
+<p><strong>在单链表中插入和删除一个数据元素，仅需要修改指针而不需要移动元素。</strong></p>
+<h5 id="算法2-10-头插法"><a href="#算法2-10-头插法" class="headerlink" title="算法2.10 头插法"></a>算法2.10 头插法</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">首先:L-&gt;next=null;</span><br><span class="line">for(i=n;i&gt;0;--i)&#123;</span><br><span class="line">	p=(LinkList)malloc(sizeof(LNode));</span><br><span class="line">	scanf(&amp;p-&gt;data);</span><br><span class="line">	p-&gt;next=L-&gt;next;</span><br><span class="line">	L-&gt;next=p;</span><br><span class="line">&#125;</span><br><span class="line">//即一直在链表的首部进行插入。</span><br></pre></td></tr></table></figure>
+<h5 id="算法2-11-将两个有序链表并为一个有序链表"><a href="#算法2-11-将两个有序链表并为一个有序链表" class="headerlink" title="算法2.11 将两个有序链表并为一个有序链表"></a>算法2.11 将两个有序链表并为一个有序链表</h5><p>P31</p>
+<h5 id="算法2-12-线性表的静态单链表存储结构"><a href="#算法2-12-线性表的静态单链表存储结构" class="headerlink" title="算法2.12 线性表的静态单链表存储结构"></a>算法2.12 线性表的静态单链表存储结构</h5><p>数据的第零分量 可看出是头结点，其指针域指示链表的第一个结点。</p>
+<p><strong>静态链表</strong></p>
+<p>在静态单链表中查找第1个值为e的元素。</p>
+<p>若第i个分量表示链表的第k个结点，则S[i].cur指示第k+1个结点的位置。</p>
+<p>i=S[i].cur的操作实为指针后移。 </p>
+<h4 id="2-3-2循环链表"><a href="#2-3-2循环链表" class="headerlink" title="2.3.2循环链表"></a>2.3.2循环链表</h4><p><strong>循环链表</strong>是另一种形式的链式存储结果。特点是表中最后一个结点的指针域指向头结点，整个链表形成一个环。</p>
+<p>将两个线性表合并成一个表时，仅需要将一个表的表尾和另一个表的表头相接。即：①Ta头结点保存②Tb表接到Ta尾③释放Tb头④Tb尾接到Ta头。</p>
+<h4 id="2-3-3-双向链表"><a href="#2-3-3-双向链表" class="headerlink" title="2.3.3 双向链表"></a>2.3.3 双向链表</h4><p>双向链表的结点中有两个指针域，其一指向直接后继，另一指向直接前驱。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct DuLNode&#123;</span><br><span class="line">	ElemType data;</span><br><span class="line">	struct DuLNode *prior;</span><br><span class="line">	struct DuLNode *next;</span><br><span class="line">&#125;DuLNode,*DuLinkList;</span><br></pre></td></tr></table></figure>
+<p>双向链表也有 循环表。</p>
+<h5 id="算法2-18-在双向链表中插入（在带头结点的双链循环链表中第i个位置前插入元素e"><a href="#算法2-18-在双向链表中插入（在带头结点的双链循环链表中第i个位置前插入元素e" class="headerlink" title="算法2.18  在双向链表中插入（在带头结点的双链循环链表中第i个位置前插入元素e)"></a>算法2.18  在双向链表中插入（在带头结点的双链循环链表中第i个位置前插入元素e)</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">p=GetElemP_DuL(L,i);//p指向第i个元素</span><br><span class="line">s=(DuLinkList)malloc(sizeof(DuLNode));</span><br><span class="line">s-&gt;data=e;</span><br><span class="line">s-&gt;prior=p-&gt;prior;</span><br><span class="line">p-&gt;prior-&gt;next=s;</span><br><span class="line">s-&gt;next=p;</span><br><span class="line">p-&gt;prior=s;</span><br></pre></td></tr></table></figure>
+<h5 id="算法2-19-在双向链表中删除第i个元素"><a href="#算法2-19-在双向链表中删除第i个元素" class="headerlink" title="算法2.19 在双向链表中删除第i个元素"></a>算法2.19 在双向链表中删除第i个元素</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p=GetElemP_DuL(L,i);//p指向第i个元素</span><br><span class="line">p-&gt;prior-&gt;next=p-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior=p&gt;prior;</span><br><span class="line">free(p);</span><br><span class="line">return ok;</span><br></pre></td></tr></table></figure>
+<p><strong>从实际应用角度出发重新定义线性链表及其基本操作</strong>：<br>一个带头结点的线性链表类型定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">typedef struct LNode&#123;//结点类型</span><br><span class="line">	ElemType data;</span><br><span class="line">	struct LNode *next;</span><br><span class="line">&#125;*Link,*Position;</span><br><span class="line"></span><br><span class="line">typedef struct&#123;//链表类型</span><br><span class="line">	Link head,tail;//分别指向线性链表中的头结点和最后一个结点</span><br><span class="line">	int len;//指示线性链表中数据元素的个数。</span><br><span class="line">&#125;LinkList;</span><br></pre></td></tr></table></figure>
+<p><strong>P38—-39</strong></p>
+<h3 id="2-4一元多项式的表示及相加"><a href="#2-4一元多项式的表示及相加" class="headerlink" title="2.4一元多项式的表示及相加"></a>2.4一元多项式的表示及相加</h3><p>一般情况下的一元n次多项式可写成：</p>
+<script type="math/tex; mode=display">
+P_n(x)=p_1x^{e_1}+p_2x^{e_2}+……+p_mx^{e_m}</script><p>一元多项式的计算：</p>
+<p>两个一元多项式的乘法的运算，可以利用两个一元多项式的加法的 算法来实现，因为乘法运算可以分解为一系列的加法运算。</p>
+<script type="math/tex; mode=display">
+M(x)=A(x)*B(x)=……
+每一项都是一个一元多项式</script><h3 id="本章习题-1"><a href="#本章习题-1" class="headerlink" title="本章习题"></a>本章习题</h3><p>11.若指定有n个元素的向量，则建立一个有序单链表的时间复杂性的量级是（  C）。</p>
+<p>A．O(1)      B．O(n)       <strong>C．O(n2)</strong>      D．O(nlog2n)</p>
+<h2 id="第三章-栈和队列"><a href="#第三章-栈和队列" class="headerlink" title="第三章 栈和队列"></a>第三章 栈和队列</h2><p>从数据结构角度看，栈和队列也是线性表，是操作受限的线性表。</p>
+<h3 id="3-1栈"><a href="#3-1栈" class="headerlink" title="3.1栈"></a>3.1栈</h3><h4 id="3-1-1-抽象数据类型栈的定义"><a href="#3-1-1-抽象数据类型栈的定义" class="headerlink" title="3.1.1 抽象数据类型栈的定义"></a>3.1.1 抽象数据类型栈的定义</h4><p>栈是限定仅在表尾进行插入或删除操作的线性表。对栈来说，表尾端有特殊含义，称为栈顶（top），表头端称为栈底（bottom），不含元素的空表称为空栈。</p>
+<p><strong>栈</strong> 又称 <strong>后进先出的线性表</strong>（LIFO）</p>
+<blockquote>
+<p> 基本操作：</p>
+<p>InitStack</p>
+<p>DestoryStack</p>
+<p>ClearStack</p>
+<p>StackEmpty</p>
+<p>StackLength</p>
+<p>GetTop</p>
+<p>Push(&amp;S,e);//插入元素e为新的栈顶元素</p>
+<p>Pop(&amp;S,e);//删除S的栈顶元素，并用e返回其值</p>
+<p>StackTraverse</p>
+</blockquote>
+<h4 id="3-1-2-栈的表示和实现（栈也有两种存储表示方法）"><a href="#3-1-2-栈的表示和实现（栈也有两种存储表示方法）" class="headerlink" title="3.1.2 栈的表示和实现（栈也有两种存储表示方法）"></a>3.1.2 栈的表示和实现（栈也有两种存储表示方法）</h4><p>顺序栈：栈的顺序存储结构是利用一组地址连续的存储单位一次存放自栈底到栈顶的数据元素，同时附设指针top指示栈顶元素在顺序栈中的位置。</p>
+<p>顺序栈：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line">	SElemType *base;//栈底指针，若base值为null，则表明栈结构不存在</span><br><span class="line">	SElemTpye *top;//栈顶指针，其初始值指向栈底，top=base可作为栈空的标志。</span><br><span class="line">	int stacksize;//指示栈的当前可使用的最大容量。</span><br><span class="line">&#125;SqStack;</span><br><span class="line">在非空栈中，其栈顶指针始终在栈顶元素的下一个位置上。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//构造一个空栈S</span><br><span class="line">S.base=(SElemType *)malloc(STACK_INIIT_SIZE*sizeof(SElemType));</span><br><span class="line">S.top=S.base;</span><br><span class="line">S.stacksize=STACK_INIT_SIZE;</span><br><span class="line">//栈满，追加存储空间。</span><br><span class="line">S.base=(SElemType *)realloc(S.base,(S.stacksize+STACK_INIIT_SIZE)*sizeof(SElemType));</span><br><span class="line">S.top=S.base+S.stacksize;</span><br><span class="line">S.stacksize+=STACK_INIT_SIZE;</span><br><span class="line">//插入元素e作为新的栈顶元素</span><br><span class="line">*S.top++=e;</span><br><span class="line">//删除S的栈顶元素，用e返回其值</span><br><span class="line">e=*--S.top;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-栈的应用举例"><a href="#3-2-栈的应用举例" class="headerlink" title="3.2 栈的应用举例"></a>3.2 栈的应用举例</h3><h4 id="3-2-1数制转换"><a href="#3-2-1数制转换" class="headerlink" title="3.2.1数制转换"></a>3.2.1数制转换</h4><p>基本原理：</p>
+<script type="math/tex; mode=display">
+N=(N div d)*d+N mod d</script><p>其中div是整除运算，mod为求余运算。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//将十进制转为八进制</span><br><span class="line">while(N)&#123;</span><br><span class="line">	Push(S,N%8);</span><br><span class="line">	N=N/8;</span><br><span class="line">&#125;//进栈</span><br><span class="line"></span><br><span class="line">while(!StackEmpty(S))&#123;</span><br><span class="line">	Pop(S,e);</span><br><span class="line">    printf(&quot;%d&quot;,e);</span><br><span class="line">&#125;//出栈</span><br><span class="line">利用后进先出的特性。</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-2-括号匹配的检验"><a href="#3-2-2-括号匹配的检验" class="headerlink" title="3.2.2 括号匹配的检验"></a>3.2.2 括号匹配的检验</h4><p>建议括号是否匹配的方法可用“期待的急迫程度”这个概念来描述。</p>
+<h4 id="3-2-3-行编辑程序"><a href="#3-2-3-行编辑程序" class="headerlink" title="3.2.3 行编辑程序"></a>3.2.3 行编辑程序</h4><p>接受用户从终端输入的程序或数据，并存入用户的数据区。</p>
+<p>若发现键入一个错误的字符，则补进一个退格符“#”。若果差错较多，这进入一个退行符“@”。</p>
+<p>为此，可设这个输入缓冲区为一个栈结构，当终端接受了一个字符后，对其进行判断，如果既不是退格符也不是退行符，则将该字符压入栈顶。若为退格符，则从栈顶删去一个字符，如果为退行符，则将字符栈清为空栈。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">while(ch!=EOF)&#123;//EOF是全文结束符。</span><br><span class="line"> while(ch!+EOF&amp;&amp;ch!=&#x27;\n&#x27;)&#123;</span><br><span class="line">	switch(ch)&#123;</span><br><span class="line">	case &#x27;#&#x27;:Pop(S,c);	break;</span><br><span class="line">	case &#x27;@&#x27;:ClearStack(S);	break;</span><br><span class="line">	default:Push(S,ch);	break;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-2-4-迷宫求解-待-理解"><a href="#3-2-4-迷宫求解-待-理解" class="headerlink" title="3.2.4 迷宫求解(待 理解)"></a>3.2.4 迷宫求解(待 理解)</h4><p>P51</p>
+<h4 id="3-2-5-表达式求值"><a href="#3-2-5-表达式求值" class="headerlink" title="3.2.5 表达式求值"></a>3.2.5 表达式求值</h4><p>任何一个表达式都是由操作数，运算符和界限符组成的，称他们为单词。</p>
+<p>为实现算符优先算法，可以使用两个工作栈。一个称为OPTR，用 以寄存运算符，另一个称做 OPND，用以寄存操作数或运算结果。算法的基本思想如下：</p>
+<p>①首先置操作数栈为空栈，表达式起始符“#”为运算符栈的栈底元素。②以此读入表达式中每个字符，若是操作数则进OPND栈，若是运算符则和OPTR栈的栈顶运算符比较优先权后做相应操作，直至每个表达式求值完毕（即OPTR栈的栈顶元素和当前读入的字符均为“#”）</p>
+<h3 id="3-3-栈和递归的实现"><a href="#3-3-栈和递归的实现" class="headerlink" title="3.3 栈和递归的实现"></a>3.3 栈和递归的实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">hanoi</span><span class="params">(<span class="type">int</span> n,<span class="type">char</span> x,<span class="type">char</span> y,<span class="type">char</span> z)</span>&#123;<span class="comment">//将塔座x上安直径由小到大且自上而下编号为1到n的n个圆盘按规则搬到塔座z上，y可用作辅助塔座。搬动操作move(x,n,z)可定义为（c是初值为0的全局变量，对搬动计数）</span></span><br><span class="line"><span class="comment">//printf(&quot;%i.move disk %i from %c to %c\n&quot;,++c,n,x,z);</span></span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">        move(x,<span class="number">1</span>,z);<span class="comment">//将编号为1的圆盘从x移动到z</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        hanoi(n<span class="number">-1</span>,x,z,y);<span class="comment">//将x上编号为1至n-1的圆盘移动到y,z作辅助</span></span><br><span class="line">        move(x,n,z);<span class="comment">//将编号为n的圆盘从x移动到z</span></span><br><span class="line">        hanoi(n<span class="number">-1</span>,y,x,z);<span class="comment">//将y上编号为1至n-1的圆盘移动到z,x作辅助</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-队列"><a href="#3-4-队列" class="headerlink" title="3.4 队列"></a>3.4 队列</h3><p><strong>队列</strong>是<strong>先进先出</strong>(FIFO)的线性表。只允许在表的一端进行插入，而在另一端进行删除元素。在队列中，允许<strong>插入</strong>的一端叫做<strong>队尾</strong>，允许<strong>删除</strong>的一端则称做<strong>队头</strong>。</p>
+<blockquote>
+<p>队列的基本操作：</p>
+<p>GetHead(Q,&amp;e);//用e返回Q的队头元素。</p>
+<p>EnQueue(&amp;Q,e);//插入元素e为Q的新的队尾元素</p>
+<p>DeQueue(&amp;Q,&amp;e);//删除Q的队头元素，并用e返回其值。</p>
+</blockquote>
+<p><strong>限定性数据结构：双端队列deque</strong>：双端队列是限定插入和删除操作在表的两端进行的线性表。</p>
+<h4 id="3-4-2-链队列——队列的链式表示和实现"><a href="#3-4-2-链队列——队列的链式表示和实现" class="headerlink" title="3.4.2 链队列——队列的链式表示和实现"></a>3.4.2 链队列——队列的链式表示和实现</h4><p>用链表表示的队列简称为链队列。</p>
+<p>为了方便起见，我们给链队列添加一个头结点，并令头指针指向头结点，由此，空的链队列的判决条件为：头指针和尾指针均指向头结点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单链队列——队列的链式存储结构：</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span>&#123;</span></span><br><span class="line">    QElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">QNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;QNode,*QueuePtr;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    QueuePtr front;</span><br><span class="line">    QueuePtr rear;</span><br><span class="line">&#125;LinkQueue;</span><br></pre></td></tr></table></figure>
+<p>队列的基本操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构造一个空队列：</span></span><br><span class="line">status <span class="title function_">InitQueue</span><span class="params">(LinkQueue &amp;Q)</span>&#123;</span><br><span class="line">    Q.front=Q.rear=(QueuePtr)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(QNode));</span><br><span class="line">    Q.front-&gt;next=null;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//销毁队列Q</span></span><br><span class="line"><span class="keyword">while</span>(Q.front)&#123;</span><br><span class="line">    Q.rear=Q.front-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(Q.front);</span><br><span class="line">    Q.front=Q.rear;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//插入元素e为Q的新的队尾元素</span></span><br><span class="line">p=(QueuePtr)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(QNode));</span><br><span class="line">p-&gt;data=e;</span><br><span class="line">p-&gt;next=null;</span><br><span class="line">Q.rear-&gt;next=p;</span><br><span class="line">Q.rear=p;</span><br><span class="line"><span class="comment">//删除Q的队头元素，用e返回其值，</span></span><br><span class="line">p=Q.front-&gt;next;</span><br><span class="line">e=p-&gt;data;</span><br><span class="line">Q.front-&gt;next=p-&gt;next;<span class="comment">//头指针往后</span></span><br><span class="line"><span class="keyword">if</span>(Q.rear==p)Q.rear=Q.front;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="3-4-3-循环队列——队列的顺序表示和实现"><a href="#3-4-3-循环队列——队列的顺序表示和实现" class="headerlink" title="3.4.3 循环队列——队列的顺序表示和实现"></a>3.4.3 <strong>循环队列</strong>——队列的顺序表示和实现</h4><h5 id="有待理解"><a href="#有待理解" class="headerlink" title="有待理解"></a>有待理解</h5><p>初始化建空队列时，令front=rear=0;每当插入新的队列尾元素时，尾指针增1，每当删除队列头元素时，头指针增1。</p>
+<p><strong>在非空队列中，头指针始终指向队列头元素，而尾指针始终指向队列尾元素的下一个位置。</strong></p>
+<p>将顺序队列臆造为一个环状的空间，称之为 循环队列<strong>：约定 ”队列头指针在队列尾指针的下一位置（指环状的下一位置）上“作为队列呈”满“状态的标志</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//循环队列——队列的顺序存储结构</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    QElemType *base;<span class="comment">//初始化的动态分配存储空间</span></span><br><span class="line">    <span class="type">int</span> front;<span class="comment">//头指针，指向队列头元素</span></span><br><span class="line">    <span class="type">int</span> rear;<span class="comment">//尾指针，指向队列尾元素的下一个位置。</span></span><br><span class="line">&#125;SqQueue;</span><br><span class="line"><span class="comment">//构造一个空队列</span></span><br><span class="line">Q.base=(QElemType*)<span class="built_in">malloc</span>(MAXSIZE*<span class="keyword">sizeof</span>(QElemType));</span><br><span class="line">Q.front=Q.rear=<span class="number">0</span>;</span><br><span class="line"><span class="comment">//返回队列的长度</span></span><br><span class="line"><span class="keyword">return</span> (Q.rear-Q.front+MAXSIZE)%MAXSIZE;</span><br><span class="line"><span class="comment">//插入元素e为Q的新的队尾元素。</span></span><br><span class="line"><span class="keyword">if</span>((Q.rear+<span class="number">1</span>)%MAXSIZE==Q.front)<span class="keyword">return</span> error;</span><br><span class="line">Q.base[Q.rear]=e;</span><br><span class="line">Q.rear=(Q.rear+<span class="number">1</span>)%MAXSIZE;</span><br><span class="line"><span class="comment">//删除队列的头元素，用e返回其值。</span></span><br><span class="line">e=Q.base[Q.front];</span><br><span class="line">Q.front=(Q.front+<span class="number">1</span>)%MAXSIZE;</span><br></pre></td></tr></table></figure>
+<h4 id="栈和队列习题"><a href="#栈和队列习题" class="headerlink" title="栈和队列习题"></a>栈和队列习题</h4><p>（2）设有一个递归算法如下</p>
+<p>​    int fact(int n) { //n大于等于0</p>
+<p>​       if(n&lt;=0) return 1;</p>
+<p>​       else return n*fact(n-1);    }</p>
+<p>则计算fact(n)需要调用该函数的次数为（ C× ）。 <strong>fact(n)本身计一次，</strong></p>
+<p><strong>A． n+1</strong>       B． n-1       C． n         D． n+2</p>
+<p>（6）最大容量为n的循环队列，队尾指针是rear，队头是front，则<strong>队空</strong>的条件是（　<strong>B）。</strong></p>
+<p> <code>A. (rear+1)%n==front          B. rear==front</code>                   </p>
+<p><code>C．rear+1==front            D. (rear-l)%n==front</code></p>
+<p>（10）设栈S和队列Q的初始状态为空，元素e1，e2，e3，e4,e5和e6依次通过栈S，一个元素出栈后即进队列Q，若6个元素出队的序列是e2，e4，e3,e6,e5,e1则栈S的容量至少应该是(  C )。</p>
+<p>A． 6      B. 4      <strong>C. 3</strong>     D. 2</p>
+<h2 id="第四章-串"><a href="#第四章-串" class="headerlink" title="第四章 串"></a>第四章 串</h2><h3 id="4-1串类型的定义"><a href="#4-1串类型的定义" class="headerlink" title="4.1串类型的定义"></a>4.1串类型的定义</h3><p>串（或字符串）是由零个或多个字符组成的有限序列，一般即为:</p>
+<script type="math/tex; mode=display">
+s='a_1a_2a_3…a_n'(n≥0)</script><blockquote>
+<p>常见概念：</p>
+<p>串的长度：串中字符的数目                空串：零个 字符</p>
+<p>子串；主串；字符在串中的位置；</p>
+<p>两个串相等：两个串长度相等，并且各个对应位置的字符都相等。</p>
+<p>空格串（blank string）：由一个或多个空格组成的串。它的长度是串中空格的个数，（和空串不一样）</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">///串定位-子串的位置</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">Index</span><span class="params">(Stirng S,String T,<span class="type">int</span> pos)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pos&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        n=StrLength(S);</span><br><span class="line">        m=StrLength(T);</span><br><span class="line">        i=pos;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;=n-m+<span class="number">1</span>)&#123;</span><br><span class="line">			SubString(sub,S,i,m);</span><br><span class="line">            <span class="keyword">if</span>(StrCompare(sub,T)!=<span class="number">0</span>)	++i;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> i;<span class="comment">//返回子串在主串中的位置。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2串的表示和实现"><a href="#4-2串的表示和实现" class="headerlink" title="4.2串的表示和实现"></a>4.2串的表示和实现</h3><p>串有三种机内表示方法。</p>
+<h4 id="4-2-1定长顺序存储表示"><a href="#4-2-1定长顺序存储表示" class="headerlink" title="4.2.1定长顺序存储表示"></a>4.2.1定长顺序存储表示</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSTRLEN 255<span class="comment">//用户可在255内定义最大串长</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span> SString[MAXSTRLEN+<span class="number">1</span>];<span class="comment">//0号单元存放串的长度</span></span><br></pre></td></tr></table></figure>
+<h5 id="串联接"><a href="#串联接" class="headerlink" title="串联接"></a>串联接</h5><blockquote>
+<p>三种情况：</p>
+<p>S1[0]+S2[0]≤MAXSTRLEN;</p>
+<p>S1[0]<MAXSTRLEN而S1[0]+S2[0]>MAXSTRLEN;</p>
+<p>S1[0]=MAXSTRLEN;</p>
+</blockquote>
+<h5 id="求子串（即为复制字符序列的过程）"><a href="#求子串（即为复制字符序列的过程）" class="headerlink" title="求子串（即为复制字符序列的过程）"></a>求子串（即为复制字符序列的过程）</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Status <span class="title function_">SubString</span><span class="params">(SString &amp;Sub,SString S,<span class="type">int</span> pos,<span class="type">int</span> len)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pos&lt;<span class="number">1</span>||pos&gt;S[<span class="number">0</span>]||len&lt;<span class="number">0</span>||len&gt;S[<span class="number">0</span>]-pos+<span class="number">1</span>)<span class="keyword">return</span> error;</span><br><span class="line">    Sub[<span class="number">1.</span>.len]=S[pos..pos+len<span class="number">-1</span>];</span><br><span class="line">    Sub[<span class="number">0</span>]=len;</span><br><span class="line">    <span class="keyword">return</span> ok;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在顺序存储结构中，实现串操作基于：字符序列的复制，时间复杂度基于复制的字符序列的长度。  截尾法常用于处理长度超过上限。</p>
+<h4 id="4-2-2堆分配存储表示"><a href="#4-2-2堆分配存储表示" class="headerlink" title="4.2.2堆分配存储表示"></a>4.2.2堆分配存储表示</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="type">char</span> *ch;<span class="comment">//若是非空串，则按串长分配存储区，否则ch为null。</span></span><br><span class="line">    <span class="type">int</span> length;</span><br><span class="line">&#125;HString;</span><br></pre></td></tr></table></figure>
+<p>StrCopy(&amp;T,S)实现算法：先释放串T所占的空间，为T开辟和S长度相等的存储空间，后将串S的值复制到串T中。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line">Status <span class="title function_">StrInsert</span><span class="params">(HString &amp;S,<span class="type">int</span> pos,HString T)</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line">S.ch=(<span class="type">char</span> *)<span class="built_in">realloc</span>(S.ch,(S.length+T.length)*<span class="keyword">sizeof</span>(<span class="type">char</span>)));<span class="comment">//重新分配空间</span></span><br><span class="line"><span class="keyword">for</span>(i=S.length<span class="number">-1</span>,i&gt;pos<span class="number">-1</span>;--i)	S.ch[i+T.length]=S.ch[i];<span class="comment">//腾出位置</span></span><br><span class="line">S.ch[pos<span class="number">-1.</span>.pos+T.length<span class="number">-2</span>]=T.ch[<span class="number">0.</span>.T.length<span class="number">-1</span>];<span class="comment">//插入T</span></span><br></pre></td></tr></table></figure>
+<p><strong>P76-77有串的堆分配存储表示及其基本操作</strong></p>
+<h4 id="4-2-3串的块链存储表示"><a href="#4-2-3串的块链存储表示" class="headerlink" title="4.2.3串的块链存储表示"></a>4.2.3串的块链存储表示</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> CHUNKSIZE 80</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Chunk</span>&#123;</span></span><br><span class="line">	<span class="type">char</span> ch[CHUNKSIZE];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Chunk</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;Chunk;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    Chunk *head,*tail;<span class="comment">//串的头和尾指针</span></span><br><span class="line">    <span class="type">int</span> curlen;<span class="comment">//串的当前长度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>链式存储方法</p>
+<script type="math/tex; mode=display">
+存储密度=\frac{串值所占的存储位}{实际分配的存储位}</script><h3 id="4-3串的模式匹配算法（不在期中考范围，待学）"><a href="#4-3串的模式匹配算法（不在期中考范围，待学）" class="headerlink" title="4.3串的模式匹配算法（不在期中考范围，待学）"></a>4.3串的模式匹配算法（不在期中考范围，待学）</h3><p>算法种类：</p>
+<ul>
+<li>BF算法：古典的，经典的，朴素的，穷举的</li>
+<li>KMP算法：速度快</li>
+</ul>
+<h3 id="4-4串操作应用"><a href="#4-4串操作应用" class="headerlink" title="4.4串操作应用"></a>4.4串操作应用</h3><h4 id="文本编辑"><a href="#文本编辑" class="headerlink" title="文本编辑"></a>文本编辑</h4><h2 id="第五章-数组和广义表"><a href="#第五章-数组和广义表" class="headerlink" title="第五章 数组和广义表"></a>第五章 数组和广义表</h2><h3 id="5-1数组的定义"><a href="#5-1数组的定义" class="headerlink" title="5.1数组的定义"></a>5.1数组的定义</h3><h3 id="5-2数组的顺序存储表示"><a href="#5-2数组的顺序存储表示" class="headerlink" title="5.2数组的顺序存储表示"></a>5.2数组的顺序存储表示</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_ARRAY_DIM 8</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    ElemType *base;<span class="comment">//数组元素基址，由initArray分配</span></span><br><span class="line">    <span class="type">int</span> dim;<span class="comment">//数组维数</span></span><br><span class="line">    <span class="type">int</span> *bounds;<span class="comment">//数组维界基址</span></span><br><span class="line">    <span class="type">int</span> *constants;<span class="comment">//数组映像函数常量基址</span></span><br><span class="line">&#125;Array;</span><br></pre></td></tr></table></figure>
+<h3 id="5-4广义表的定义"><a href="#5-4广义表的定义" class="headerlink" title="5.4广义表的定义"></a>5.4广义表的定义</h3><p>广义表是线性表的推广。</p>
+<p>广义表一般记作：</p>
+<script type="math/tex; mode=display">
+LS=(a_1,a_2,…,a_n)</script><p>其中，LS是广义表的名称，n是其长度，在广义表中a_i可以是单个元素，亦可以是广义表，分别称为广义表的原子和子表。当广义表LS非空时，称第一个元素a1为LS的表头head，称其余元素组成的表(a2,a3,…an)为LS的表尾tail。</p>
+<p>结论：</p>
+<ul>
+<li>列表的元素可以是子表，子表的元素还可以是子表</li>
+<li>列表可为其他列表所共享</li>
+<li>列表可以是一个递归的表，即列表也可以是其本身的一个子表。</li>
+<li>任何一个非空列表的表头可能是原子，也可能是列表，而其表尾必定是列表。</li>
+</ul>
+<h3 id="5-5广义表的存储结构"><a href="#5-5广义表的存储结构" class="headerlink" title="5.5广义表的存储结构"></a>5.5广义表的存储结构</h3><p>通常采用链式存储结构，每个数据元素可用一个结点表示。</p>
+<h2 id="第六章-树和二叉树"><a href="#第六章-树和二叉树" class="headerlink" title="第六章 树和二叉树"></a>第六章 树和二叉树</h2><p>树形结构是一类重要的<strong>非线性数据结构。</strong></p>
+<h3 id="6-1数的定义和基本术语"><a href="#6-1数的定义和基本术语" class="headerlink" title="6.1数的定义和基本术语"></a>6.1数的定义和基本术语</h3><p>树是n个结点的有限集。在任意一棵非空树种，有且仅有一个特定的称为根的结点。</p>
+<p>树的表示方法：①嵌套集合②以广义表的形式表示③凹入表示法</p>
+<blockquote>
+<p>基本术语；</p>
+<p>结点的度（结点拥有的子树的数目）</p>
+<p>叶子、终端结点</p>
+<p>非终端结点、分支结点</p>
+<p>树的度（各结点度的最大值）</p>
+<p>孩子，双亲，兄弟，祖先，子孙</p>
+<p>结点的层次：（根为第一层，根的孩子为第二层）</p>
+<p>堂兄弟：其双亲在同一层的结点</p>
+<p>树的深度：树中结点的最大层次</p>
+<p>有序树：树中结点的各子树看成从左至右是有次序的（即不能互换）</p>
+<p>森林：是m棵互不相交的树的集合。</p>
+</blockquote>
+<h3 id="6-2二叉树"><a href="#6-2二叉树" class="headerlink" title="6.2二叉树"></a>6.2二叉树</h3><p>特点：每个结点至多只有两棵子树（即二叉树中不存在度大于2的结点）。二叉树的子树有左右之分，其次序不能任意颠倒。</p>
+<p>3个结点的二叉树有5种；3个结点的树有2种。</p>
+<h4 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h4><p><strong>性质1：在二叉树的第i层上最多有2^(i-1)个结点（i≥1）</strong></p>
+<p><strong>性质2：深度为K的二叉树最多有2^k-1个结点（k≥1)</strong></p>
+<p><strong>性质3：对任何一棵二叉树T，如果其终端结点数为n0，度为2的结点数为n2，则n0=n2+1</strong></p>
+<p>完全二叉树和满二叉树</p>
+<p><strong>性质4：具有n个结点的完全二叉树的深度为[log_2n]+1</strong></p>
+<script type="math/tex; mode=display">
+k=[log_2n]+1</script><p><strong>性质5：n个结点的完全二叉树，深度为<script type="math/tex">[log_2n]+1</script>的结点按层次编号，从上到下，从左到右。则：①i=1时，其为二叉树的根，无双亲②i的左孩子是2i，右孩子是2i+1；其中i是双亲。</strong></p>
+<h4 id="6-2-3二叉树的存储结构"><a href="#6-2-3二叉树的存储结构" class="headerlink" title="6.2.3二叉树的存储结构"></a>6.2.3二叉树的存储结构</h4><h5 id="顺序存储结构"><a href="#顺序存储结构" class="headerlink" title="顺序存储结构"></a>顺序存储结构</h5><p>仅适用于完全二叉树，否者严重造成存储空间的浪费。</p>
+<h5 id="链式存储结构"><a href="#链式存储结构" class="headerlink" title="链式存储结构"></a>链式存储结构</h5><p><strong>在含n个结点的二叉链表中有n+1个空链域。</strong><script type="math/tex">2n-(n-1)=n+1</script>其中n个结点有2n个链域，除根结点外，其它结点都有一个双亲（即都占有着双亲的一个链域）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span>&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span><span class="comment">//左右孩子指针</span></span><br><span class="line">&#125;BiTNode,*BiTree;</span><br></pre></td></tr></table></figure>
+<h3 id="6-3遍历二叉树和线索二叉树"><a href="#6-3遍历二叉树和线索二叉树" class="headerlink" title="6.3遍历二叉树和线索二叉树"></a>6.3遍历二叉树和线索二叉树</h3><p><strong>二叉树是一种非线性结构</strong></p>
+<p>三种遍历方法：</p>
+<ul>
+<li>先序遍历：根结点——左子树——右子树</li>
+<li>中序遍历：左子树——根结点——右子树</li>
+<li>后序遍历：左子树——右子树——根结点</li>
+</ul>
+<p><strong>递归算法：</strong></p>
+<p>P131</p>
+<h4 id="6-3-2线索二叉树"><a href="#6-3-2线索二叉树" class="headerlink" title="6.3.2线索二叉树"></a>6.3.2线索二叉树</h4><p>增加了两个标志域，</p>
+<p>这种结构构成的二叉链表作为二叉树 的存储结构，叫做线索链表。</p>
+<p>其中指向结点前驱和后继的指针，叫做线索。</p>
+<p>加上线索的二叉树又称为线索二叉树。</p>
+<p>实线为指针（指向左右子树），虚线为线索（指向前驱和后继）</p>
+<p>对二叉树以某种次序遍历使其变为线索二叉树的过程叫做线索化。</p>
+
+    </div>
+
+    
+    
+    
+
+
+<div>
+  
+    
+<div>
+    
+        <div style="text-align:center;font-size:14px;">-------------本文结束感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        <div class="reward-container">
+  <div>情不知从所起，一往而深！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Likt 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Likt
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://likt11.github.io/2024/07/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="《数据结构C语言版》期末复习">http://likt11.github.io/2024/07/21/数据结构复习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%80%BB%E7%BB%93/" rel="tag"><i class="fa fa-tag"></i> 总结</a>
+              <a href="/tags/%E5%A4%8D%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 复习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/21/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91/" rel="prev" title="哈夫曼树及求Huffman编码">
+      <i class="fa fa-chevron-left"></i> 哈夫曼树及求Huffman编码
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/07/21/%E5%9B%BE%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/" rel="next" title="实现图的深度优先和广度优先遍历">
+      实现图的深度优先和广度优先遍历 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BB%AA%E8%AE%BA"><span class="nav-number">1.1.</span> <span class="nav-text">第一章 绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1什么是数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2基本概念和术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%A1%A8%E7%8E%B0%E4%B8%8E%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3抽象数据类型的表现与实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4%E7%AE%97%E6%B3%95%E5%92%8C%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4算法和算法分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E4%B9%A0%E9%A2%98"><span class="nav-number">1.1.5.</span> <span class="nav-text">本章习题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="nav-number">1.2.</span> <span class="nav-text">第二章 线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">线性表的类型定义</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B2-1%EF%BC%9A%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E7%BA%BF%E6%80%A7%E8%A1%A8"><span class="nav-number">1.2.1.0.1.</span> <span class="nav-text">例2-1：合并两个线性表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BE%8B2-2%EF%BC%9A-%E5%B7%B2%E7%9F%A5LA%E5%92%8CLB%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0%E6%8C%89%E5%80%BC%E9%9D%9E%E9%80%92%E5%87%8F%E6%9C%89%E5%BA%8F%E6%8E%92%E5%88%97%EF%BC%8C%E7%8E%B0%E8%A6%81%E6%B1%82%E5%B0%86LA%E5%92%8CLB%E5%BD%92%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E7%BA%BF%E6%80%A7%E8%A1%A8LC%EF%BC%8C%E4%B8%94LC%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0%E6%89%94%E6%8C%89%E5%80%BC%E9%9D%9E%E9%80%92%E5%87%8F%E6%9C%89%E5%BA%8F%E6%8E%92%E5%88%97"><span class="nav-number">1.2.1.0.2.</span> <span class="nav-text">例2-2： 已知LA和LB中的数据元素按值非递减有序排列，现要求将LA和LB归并为一个新的线性表LC，且LC中的数据元素扔按值非递减有序排列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2线性表的顺序表示和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-3%EF%BC%9A%E5%9C%A8%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E7%AC%ACi-1%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0%E5%92%8C%E7%AC%ACi%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0%E4%B9%8B%E9%97%B4%E6%8F%92%E5%85%A5%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.2.0.1.</span> <span class="nav-text">算法2.3：在线性表的第i-1个数据元素和第i个数据元素之间插入一个新的数据元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-4%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.0.2.</span> <span class="nav-text">算法2.4线性表的删除操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-5-%E5%9C%A8%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E7%9A%84%E7%BA%BF%E6%80%A7%E8%A1%A8%E4%B8%AD%E6%8F%92%E5%85%A5%E6%88%96%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0%EF%BC%8C%E5%B9%B3%E5%9D%87%E7%A7%BB%E5%8A%A8%E8%A1%A8%E4%B8%AD%E4%B8%80%E5%8D%8A%E5%85%83%E7%B4%A0%EF%BC%8C%E8%8B%A5%E8%A1%A8%E9%95%BF%E4%B8%BAn%EF%BC%8C%E5%88%994-3%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%9D%87%E4%B8%BAO-n"><span class="nav-number">1.2.2.0.3.</span> <span class="nav-text">算法2.5 在顺序存储结构的线性表中插入或删除一个数据元素，平均移动表中一半元素，若表长为n，则4,3算法的时间复杂度均为O(n)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-6-%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%9A%84%E5%90%88%E5%B9%B6"><span class="nav-number">1.2.2.0.4.</span> <span class="nav-text">算法2.6 顺序表的合并</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-7-%E5%85%83%E7%B4%A0%E8%B5%8B%E5%80%BC%EF%BC%8C%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO-La-length-Lb-length"><span class="nav-number">1.2.2.0.5.</span> <span class="nav-text">算法2.7  元素赋值，时间复杂度为O(La.length+Lb.length)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%93%BE%E5%BC%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 线性表的链式表示和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1%E7%BA%BF%E6%80%A7%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">2.3.1线性链表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-8%E5%9C%A8%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%8F%92%E5%85%A5%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.3.1.1.</span> <span class="nav-text">算法2.8在单链表中插入一个数据元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-9%E5%9C%A8%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.3.1.2.</span> <span class="nav-text">算法2.9在单链表中删除一个数据元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-10-%E5%A4%B4%E6%8F%92%E6%B3%95"><span class="nav-number">1.2.3.1.3.</span> <span class="nav-text">算法2.10 头插法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-11-%E5%B0%86%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8%E5%B9%B6%E4%B8%BA%E4%B8%80%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.3.1.4.</span> <span class="nav-text">算法2.11 将两个有序链表并为一个有序链表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-12-%E7%BA%BF%E6%80%A7%E8%A1%A8%E7%9A%84%E9%9D%99%E6%80%81%E5%8D%95%E9%93%BE%E8%A1%A8%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.3.1.5.</span> <span class="nav-text">算法2.12 线性表的静态单链表存储结构</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2.3.2循环链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">2.3.3 双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-18-%E5%9C%A8%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B8%AD%E6%8F%92%E5%85%A5%EF%BC%88%E5%9C%A8%E5%B8%A6%E5%A4%B4%E7%BB%93%E7%82%B9%E7%9A%84%E5%8F%8C%E9%93%BE%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%AC%ACi%E4%B8%AA%E4%BD%8D%E7%BD%AE%E5%89%8D%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0e"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">算法2.18  在双向链表中插入（在带头结点的双链循环链表中第i个位置前插入元素e)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AE%97%E6%B3%952-19-%E5%9C%A8%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%88%A0%E9%99%A4%E7%AC%ACi%E4%B8%AA%E5%85%83%E7%B4%A0"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">算法2.19 在双向链表中删除第i个元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4%E4%B8%80%E5%85%83%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%8F%8A%E7%9B%B8%E5%8A%A0"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4一元多项式的表示及相加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E4%B9%A0%E9%A2%98-1"><span class="nav-number">1.2.5.</span> <span class="nav-text">本章习题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97"><span class="nav-number">1.3.</span> <span class="nav-text">第三章 栈和队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1%E6%A0%88"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%A0%88%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">3.1.1 抽象数据类型栈的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-%E6%A0%88%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%A0%88%E4%B9%9F%E6%9C%89%E4%B8%A4%E7%A7%8D%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">3.1.2 栈的表示和实现（栈也有两种存储表示方法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 栈的应用举例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1%E6%95%B0%E5%88%B6%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">3.2.1数制转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E7%9A%84%E6%A3%80%E9%AA%8C"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">3.2.2 括号匹配的检验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-%E8%A1%8C%E7%BC%96%E8%BE%91%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">3.2.3 行编辑程序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-4-%E8%BF%B7%E5%AE%AB%E6%B1%82%E8%A7%A3-%E5%BE%85-%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">3.2.4 迷宫求解(待 理解)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-5-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="nav-number">1.3.2.5.</span> <span class="nav-text">3.2.5 表达式求值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%A0%88%E5%92%8C%E9%80%92%E5%BD%92%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 栈和递归的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E9%98%9F%E5%88%97"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4 队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-%E9%93%BE%E9%98%9F%E5%88%97%E2%80%94%E2%80%94%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E5%BC%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">3.4.2 链队列——队列的链式表示和实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-3-%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E2%80%94%E2%80%94%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">3.4.3 循环队列——队列的顺序表示和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89%E5%BE%85%E7%90%86%E8%A7%A3"><span class="nav-number">1.3.4.2.1.</span> <span class="nav-text">有待理解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E4%B9%A0%E9%A2%98"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">栈和队列习题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E4%B8%B2"><span class="nav-number">1.4.</span> <span class="nav-text">第四章 串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1%E4%B8%B2%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1串类型的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2%E4%B8%B2%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2串的表示和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1%E5%AE%9A%E9%95%BF%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">4.2.1定长顺序存储表示</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%B2%E8%81%94%E6%8E%A5"><span class="nav-number">1.4.2.1.1.</span> <span class="nav-text">串联接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B1%82%E5%AD%90%E4%B8%B2%EF%BC%88%E5%8D%B3%E4%B8%BA%E5%A4%8D%E5%88%B6%E5%AD%97%E7%AC%A6%E5%BA%8F%E5%88%97%E7%9A%84%E8%BF%87%E7%A8%8B%EF%BC%89"><span class="nav-number">1.4.2.1.2.</span> <span class="nav-text">求子串（即为复制字符序列的过程）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-2%E5%A0%86%E5%88%86%E9%85%8D%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">4.2.2堆分配存储表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3%E4%B8%B2%E7%9A%84%E5%9D%97%E9%93%BE%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">4.2.3串的块链存储表示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3%E4%B8%B2%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%8D%E5%9C%A8%E6%9C%9F%E4%B8%AD%E8%80%83%E8%8C%83%E5%9B%B4%EF%BC%8C%E5%BE%85%E5%AD%A6%EF%BC%89"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3串的模式匹配算法（不在期中考范围，待学）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4%E4%B8%B2%E6%93%8D%E4%BD%9C%E5%BA%94%E7%94%A8"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4串操作应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">文本编辑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%95%B0%E7%BB%84%E5%92%8C%E5%B9%BF%E4%B9%89%E8%A1%A8"><span class="nav-number">1.5.</span> <span class="nav-text">第五章 数组和广义表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1数组的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2%E6%95%B0%E7%BB%84%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E8%A1%A8%E7%A4%BA"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2数组的顺序存储表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.4广义表的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5%E5%B9%BF%E4%B9%89%E8%A1%A8%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.4.</span> <span class="nav-text">5.5广义表的存储结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%A0%91%E5%92%8C%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.6.</span> <span class="nav-text">第六章 树和二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%9F%BA%E6%9C%AC%E6%9C%AF%E8%AF%AD"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1数的定义和基本术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">二叉树的性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-3%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">6.2.3二叉树的存储结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.2.2.1.</span> <span class="nav-text">顺序存储结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.6.2.2.2.</span> <span class="nav-text">链式存储结构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3%E9%81%8D%E5%8E%86%E4%BA%8C%E5%8F%89%E6%A0%91%E5%92%8C%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3遍历二叉树和线索二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-2%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">1.6.3.1.</span> <span class="nav-text">6.3.2线索二叉树</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Likt"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Likt</p>
+  <div class="site-description" itemprop="description">请你务必，一而再，再而三，三而不竭，千次万次，毫不犹豫地救自己于这世间水火。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Likt</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/08/2024 10:11:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '5CGDgZL88OYzRNYj1PLjmcBc-gzGzoHsz',
+      appKey     : 'N0AqOmhJqbysjAOoqieRu6Jv',
+      placeholder: "期待与您的交流！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #4D4D4C;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #F7F7F7;
+      background-image: linear-gradient(#F7F7F7, #F7F7F7);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('post.copy_button').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('post.copy_success')
+          else $(this).text('post.copy_failure')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('post.copy_button')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
