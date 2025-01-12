@@ -6,7 +6,7 @@
   <link href="http://likt11.github.io/atom.xml" rel="self"/>
   
   <link href="http://likt11.github.io/"/>
-  <updated>2024-10-16T09:27:30.495Z</updated>
+  <updated>2025-01-12T08:53:31.699Z</updated>
   <id>http://likt11.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pytorch安装</title>
+    <link href="http://likt11.github.io/2025/01/12/pytorch%E5%AE%89%E8%A3%85/"/>
+    <id>http://likt11.github.io/2025/01/12/pytorch%E5%AE%89%E8%A3%85/</id>
+    <published>2025-01-12T08:24:29.000Z</published>
+    <updated>2025-01-12T08:53:31.699Z</updated>
+    
+    
+    <summary type="html">记录一下pytorch搭建过程……</summary>
+    
+    
+    
+    <category term="技术文档" scheme="http://likt11.github.io/categories/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/"/>
+    
+    
+    <category term="python" scheme="http://likt11.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>netcat正向和反向shell</title>

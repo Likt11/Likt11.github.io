@@ -1553,4 +1553,60 @@ k=[log_2n]+1</script><p><strong>性质5：n个结点的完全二叉树，深度�
         <tag>摘抄</tag>
       </tags>
   </entry>
+  <entry>
+    <title>pytorch安装</title>
+    <url>/2025/01/12/pytorch%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><ol>
+<li>没有nVidia显卡，只能安装CPU版本</li>
+</ol>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/image-20241006134953330-17281937952921.png" alt="image-20241006134953330"></p>
+<ol>
+<li><p><a href="https://www.anaconda.com/download/">官网</a>下载Anaconda</p>
+</li>
+<li><p>安装+登录账号【自行选择路径，一直下一步就行】</p>
+</li>
+<li><p>自带基础环境base0，学习创建虚拟环境【一个项目一个虚拟环境、避免干扰】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda env list查看有哪些环境</span><br><span class="line">conda create -n 名称 python=3.12   创建环境，创建完成之后用上面命令测试一下是否成功</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装pytorch</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda config --show</span><br><span class="line">或者</span><br><span class="line">conda config --get查看到默认的channel为default即到官网下载。</span><br></pre></td></tr></table></figure>
+<p>下载pytorch前确定将其安装到哪一个虚拟环境下，（默认base）这里选择进入test0如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda activate test0</span><br></pre></td></tr></table></figure>
+<p>可以通过镜像下载（更快）①把镜像地址加到channel中②下载时-c指定下载地址</p>
+<p>①conda config —add channels 通道地址</p>
+<p>如果要删除通道则 conda config —remove channels 通道地址</p>
+<p>②直接-c指定镜像下载</p>
+<p>| 镜像               | 链接                                                    |<br>| ————————— | ———————————————————————————- |<br>| 清华镜像           | <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main">https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main</a> |<br>| 北京外国语大学镜像 | <a href="https://mirrors.bfsu.edu.cn/anaconda/pkgs/main">https://mirrors.bfsu.edu.cn/anaconda/pkgs/main</a>          |<br>| 阿里巴巴镜像       | <a href="http://mirrors.aliyun.com/anaconda/pkgs/main">http://mirrors.aliyun.com/anaconda/pkgs/main</a>            |</p>
+<p>③进入<a href="https://pytorch.org/">pytorch官网</a></p>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/image-20241006152953464-17281997946362.png" alt="image-20241006152953464"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio cpuonly -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main #这是用-c镜像下载</span><br></pre></td></tr></table></figure>
+<p><strong>注：</strong>我用了前两个镜像都失败了，还是老老实实官网吧：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda install pytorch torchvision torchaudio cpuonly -c pytorch</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>检验是否成功</p>
+<p>①<code>conda activate test0</code>激活进入虚拟环境，<code>conda list</code>出现pytorch成功：</p>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/image-20241006153047929-17281998487393.png" alt="image-20241006153047929"></p>
+<p>②就在当前test0虚拟环境下输入python</p>
+<p>③<code>import torch</code></p>
+<p>③ <code>torch.cuda.is_available()</code>#检验我们电脑是否可以用GPU，因为没有，当然false</p>
+<p>如果显示false，说明我们pytorch安装成功</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\pytorch安装.assets\image-20241006153645377-17282002061244.png" alt="image-20241006153645377"></p>
+</li>
+</ol>
+<p>pycharm2024.2.3</p>
+<p>安装、打开pycharm</p>
+<p>allsettings—python interpreter—add interpreter—conda environment—选择anaconda3路径下的conda.exe—<strong>apply</strong>—OK一定要先apply再OK</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\pytorch安装.assets\image-20241006161545800-17282025481885.png" alt="image-20241006161545800"></p>
+<p>创建一个项目，记得要选择之前的有安装torch的环境test0</p>
+<p><img data-src="https://raw.githubusercontent.com/Likt11/clouding/main/img/image-20241017230930184.png" alt="image-20241017230930184"></p>
+]]></content>
+      <categories>
+        <category>技术文档</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
 </search>
