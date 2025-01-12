@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="KRqm7Lu_cZK-ZkctKdb9ybG_kBgFXWDh41mUPXdJNd8">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="codeva-KIwwTfWo4R">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"likt11.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownBigOut"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="共识机制……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链实训三：共识机制学习实践">
+<meta property="og:url" content="http://likt11.github.io/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="Likt&#39;s Blog">
+<meta property="og:description" content="共识机制……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE 2024-09-29 123244.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20240929124221124.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20240929124520778.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE 2024-09-29 095437.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE 2024-09-29 092912-17275807330481.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE 2024-09-29 092935.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20241002230536999.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20241002230639096.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20241002230705849.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE 2024-09-29 123244.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20240929124221124.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20241003154513050.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\image-20241003154351744.png">
+<meta property="article:published_time" content="2025-01-12T09:04:03.000Z">
+<meta property="article:modified_time" content="2025-01-12T09:07:12.686Z">
+<meta property="article:author" content="Likt">
+<meta property="article:tag" content="区块链">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="e:\Git\MyBlog\source\_drafts\%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5.assets\%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE 2024-09-29 123244.png">
+
+<link rel="canonical" href="http://likt11.github.io/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>区块链实训三：共识机制学习实践 | Likt's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Likt's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Likt's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天空一直都在，是云来了又去。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://likt11.github.io/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Likt">
+      <meta itemprop="description" content="请你务必，一而再，再而三，三而不竭，千次万次，毫不犹豫地救自己于这世间水火。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Likt's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          区块链实训三：共识机制学习实践
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-01-12 17:04:03 / 修改时间：17:07:12" itemprop="dateCreated datePublished" datetime="2025-01-12T17:04:03+08:00">2025-01-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/" itemprop="url" rel="index"><span itemprop="name">实验报告</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/" class="post-meta-item leancloud_visitors" data-flag-title="区块链实训三：共识机制学习实践" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>33 分钟</span>
+            </span>
+            <div class="post-description">共识机制……</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="实训报告三"><a href="#实训报告三" class="headerlink" title="实训报告三"></a>实训报告三</h1><p><strong>课程：区块链实训        实验名称：实训三 共识机制学习实践    </strong></p>
+<p><strong>专业：网络空间安全      班级：2班</strong></p>
+<p><strong>学号：121122022070    姓名：李婷香</strong>      <strong>实验日期：2024.10.3</strong></p>
+<h2 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h2><ol>
+<li>学习PoW,PoS共识机制</li>
+<li>PoW共识机制的实践</li>
+<li>postman启用接口、navicat连接SQLite数据库</li>
+</ol>
+<h2 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h2><ol>
+<li>Windows IDEA</li>
+<li>引导节点：p2p_bootstrap.git</li>
+<li>对等节点：block_chain.git</li>
+</ol>
+<h2 id="三、实验步骤"><a href="#三、实验步骤" class="headerlink" title="三、实验步骤"></a>三、实验步骤</h2><p>1.本机启动了一个引导节点、一个对等节点，组员启动了一个对等节点</p>
+<p>启动引导节点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server.port=8886</span><br><span class="line">bootstrap.ip=  192.168.227.61</span><br><span class="line">bootstrap.port=8883</span><br></pre></td></tr></table></figure>
+<p>启动对等节点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server.port=8001</span><br><span class="line">bootstrap.ip =   192.168.227.61</span><br><span class="line">bootstrap.port = 8883</span><br><span class="line">node.ip=   192.168.227.61</span><br><span class="line">node.port = 8887</span><br><span class="line">spring.servlet.multipart.max-request-size=200MB</span><br><span class="line">spring.servlet.multipart.max-file-size=200MB</span><br></pre></td></tr></table></figure>
+<p>组员启动对等节点：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">server.port=8001</span><br><span class="line">bootstrap.ip =   192.168.227.61</span><br><span class="line">bootstrap.port = 8883</span><br><span class="line">node.ip=   192.168.227.149</span><br><span class="line">node.port = 8887</span><br><span class="line">spring.servlet.multipart.max-request-size=200MB</span><br><span class="line">spring.servlet.multipart.max-file-size=200MB</span><br></pre></td></tr></table></figure>
+<p>2.对等节点观察到信息如下：</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\屏幕截图 2024-09-29 123244.png" alt="img" style="zoom:50%;" /></p>
+<p>3.使用postman进入接口，开始挖矿：<br><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20240929124221124.png" alt="image-20240929124221124" style="zoom:50%;" /></p>
+<p>4.观察到文件目录下多出来两个文件夹<code>db</code>&amp;<code>ws</code>,其中db即SQLite数据库文件，ws即挖到的区块文件。由于对等节点一旦形成之间互相连接，文件共享，挖到的区块数目会一致。</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20240929124520778.png" alt="image-20240929124520778" style="zoom:50%;" /></p>
+<p>5.使用IDEA调试并明确断点，可以实时观察到各参数信息：</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\屏幕截图 2024-09-29 095437.png" alt="img" style="zoom:50%;" /></p>
+<p>6.使用navicat连接SQLite数据库，BlockChain.db测试连接，连接成功之后确认，可以查看到SQLite的三张表：block0,dictionary,pending</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\屏幕截图 2024-09-29 092912-17275807330481.png" alt="img" style="zoom:50%;" /></p>
+<p>7.查看结果如下：<br><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\屏幕截图 2024-09-29 092935.png" alt="img" style="zoom:50%;" /></p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20241002230536999.png" alt="image-20241002230536999" style="zoom:50%;" /></p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20241002230639096.png" alt="image-20241002230639096" style="zoom:50%;" /></p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20241002230705849.png" alt="image-20241002230705849" style="zoom:50%;" /></p>
+<p>8.可以对比两个对等节点之间的区块数据会发现确实一致。</p>
+<h2 id="四、实验结果与讨论"><a href="#四、实验结果与讨论" class="headerlink" title="四、实验结果与讨论"></a>四、实验结果与讨论</h2><ol>
+<li><p>引导节点、两个对等节点启动：</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\屏幕截图 2024-09-29 123244.png" alt="img" style="zoom:50%;" /></p>
+</li>
+<li><p>使用postman进入接口，开始挖矿，成功出现ws区块文件夹</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20240929124221124.png" alt="image-20240929124221124" style="zoom:50%;" /></p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20241003154513050.png" alt="image-20241003154513050" style="zoom:50%;" /></p>
+</li>
+<li><p>使用navicat连接SQLite数据库：BlockChain.db</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\区块链实训三：共识机制学习实践.assets\image-20241003154351744.png" alt="image-20241003154351744" style="zoom:50%;" /></p>
+</li>
+</ol>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><ol>
+<li><p>PoW的核心原理是基于哈希函数的不可预测性和随机性。在PoW中，矿工需要寻找一个特定的哈希值，使得区块头的哈希满足一定的条件，通常要求哈希值以一定数量的前导零开头。这个条件在数学上是难以预测的，唯一的方法是通过不断尝试不同的随机数来进行哈希计算，直到找到满足条件的哈希值，这需要大量的计算能力。<strong>步骤</strong>：①选择交易和构建区块头；②挑战难题；③工作量竞赛；④寻找满足条件的哈希值。</p>
+<p>定义一个共同的目标，然后根据不同机器的计算能力来先算出这个目标的结果，计算成功后通知其他节点，来进行验证，一旦验证通过，当前区块的计算即被种植，这个结果会被广泛接受并被用于产生新的区块。</p>
+</li>
+<li><p>Pos权益证明机制，通过参与者持有的代币数量来决定其创建新区快的权利。<strong>步骤：</strong>①抵押代币：抵押到网络中，这些代币被锁定，与被选中的概率更高。②选择出块节点：即有权利创建新区块的节点。③负责验证交易和创建新区快。④奖励和惩罚：（抵押的代币）。<strong>优势</strong>：①能源效率大幅降低；②去中心化，代币持有者积极参与共识机制，避免了算例集中问题；③安全性，攻击的成本和难度，攻击者需要破坏自身的利益来攻击；④能够扩展性，无需进行负责计算，只要进行验证和区块创建，可以更轻松的处理更多的交易和数据；⑤减少硬件竞争，节约了资源。<strong>局限性：</strong>①权力集中，更多代币的参与者有更大的权力；②节点激励问题，可能缺乏积极性，影响网络的安全性和稳定性；③链长问题，更倾向于选择更多代笔的链，更大话语权；④算法设计复杂性，要考虑权益抵押、随机性，容易不稳定。</p>
+</li>
+<li><p>一些其他的共识机制：</p>
+<ul>
+<li>权威共识DPoS（代币持有者通过选举一组代表来确认交易和生成区块）</li>
+<li>拜占庭容错BFT（强调在节点存在故障或恶意行为时仍然能够保持一致性的共识机制，确保只要节点中的大多数诚实，就能达成共识）</li>
+<li>权益授权PoA（基于授权节点）</li>
+<li>流动性共识PoL（将流动性提供者纳入共识过程的机制，将代币锁定在智能合约中，以提供流动性支持，同时获得交易手续费和奖励）</li>
+<li>实践证明PoET（通过随机等待时间来选择区块生产者的共识机制）</li>
+</ul>
+</li>
+<li><p>SQLite数据库：</p>
+<ul>
+<li>block表：存储区块对应的信息</li>
+<li>dictionary表：存储区块的当前配置</li>
+<li>pending表：存储等待打包的交易</li>
+</ul>
+</li>
+</ol>
+<h2 id="附上代码"><a href="#附上代码" class="headerlink" title="附上代码"></a>附上代码</h2><ol>
+<li><p>难题设置以及工作量竞赛</p>
+<p>①block实体</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.blockchain.entity.block;</span><br><span class="line"><span class="keyword">import</span> lombok.Getter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Block</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> String blockIndex;</span><br><span class="line">    <span class="keyword">public</span> String blockHash;</span><br><span class="line">    <span class="keyword">public</span> String preBlockHash;</span><br><span class="line">    <span class="keyword">public</span> String workLoad;</span><br><span class="line">    <span class="keyword">public</span> String createTime;</span><br><span class="line">    <span class="keyword">public</span> String path;</span><br><span class="line">    <span class="keyword">public</span> String dataJson;</span><br><span class="line">    <span class="keyword">public</span> String tradeIds;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> id;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">workString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Block&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;blockIndex=&#x27;&quot;</span> + blockIndex + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, blockPreHash=&#x27;&quot;</span> + preBlockHash + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, workLoad=&#x27;&quot;</span> + workLoad + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, dataJson=&#x27;&quot;</span> + dataJson + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, createTime=&#x27;&quot;</span> + createTime + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, path=&#x27;&quot;</span> + path + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, randomNumber=&#x27;&quot;</span> + randomNumber + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, tradeIds=&#x27;&quot;</span> + tradeIds + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Block&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;blockIndex=&#x27;&quot;</span> + blockIndex + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, blockHash=&#x27;&quot;</span> + blockHash + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, blockPreHash=&#x27;&quot;</span> + preBlockHash + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, workLoad=&#x27;&quot;</span> + workLoad + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, dataJson=&#x27;&quot;</span> + dataJson + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, createTime=&#x27;&quot;</span> + createTime + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, path=&#x27;&quot;</span> + path + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, tradeIds=&#x27;&quot;</span> + tradeIds + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, randomNumber=&#x27;&quot;</span> + randomNumber + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getBlockIndex</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> blockIndex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBlockIndex</span><span class="params">(String blockIndex)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.blockIndex = blockIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getBlockHash</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> blockHash;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBlockHash</span><span class="params">(String blockHash)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.blockHash = blockHash;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPreBlockHash</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> preBlockHash;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPreBlockHash</span><span class="params">(String preBlockHash)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.preBlockHash = preBlockHash;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getWorkLoad</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> workLoad;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String randomNumber;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getPath</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> path;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setPath</span><span class="params">(String path)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.path = path;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWorkLoad</span><span class="params">(String workLoad)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.workLoad = workLoad;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getCreateTime</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> createTime;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCreateTime</span><span class="params">(String createTime)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.createTime = createTime;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(<span class="type">int</span> id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getRandomNumber</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> randomNumber;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setRandomNumber</span><span class="params">(String randomNumber)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.randomNumber = randomNumber;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getDataJson</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> dataJson;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setDataJson</span><span class="params">(String dataJson)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.dataJson = dataJson;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getTradeIds</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> tradeIds;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setTradeIds</span><span class="params">(String tradeIds)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.tradeIds = tradeIds;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>②开始运算</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">&quot;开始运算---------------------&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">trueCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">falseCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">preBlockIndex</span> <span class="operator">=</span> String.valueOf(UpdateTimer.currentMaxBlockIndex);</span><br><span class="line">BlockServiceImpl.checkBlockTable(preBlockIndex);</span><br><span class="line">List&lt;Block&gt; blocks = BlockServiceImpl.queryBlockByBlockIndex(preBlockIndex);</span><br><span class="line"><span class="type">Block</span> <span class="variable">currentBlock</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">if</span> (blocks.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">	currentBlock = blocks.get(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (currentBlock == <span class="literal">null</span>) &#123;</span><br><span class="line">	currentBlock = <span class="keyword">new</span> <span class="title class_">Block</span>();</span><br><span class="line">	currentBlock.setBlockHash(<span class="string">&quot;First block hash&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">Dictionary</span> <span class="variable">diffWorkload</span> <span class="operator">=</span> InitUtils.intiDifficulty();<span class="comment">// 字典表的工作量配置</span></span><br><span class="line"><span class="type">String</span> <span class="variable">maxBlockIndex</span> <span class="operator">=</span> currentBlock.getBlockIndex();</span><br><span class="line"><span class="type">String</span> <span class="variable">nextBlockIndex</span> <span class="operator">=</span> getNextBlockIndex(maxBlockIndex);</span><br><span class="line"><span class="type">Block</span> <span class="variable">block</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Block</span>();</span><br><span class="line"><span class="type">Random</span> <span class="variable">r</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Random</span>();</span><br><span class="line"><span class="type">String</span> <span class="variable">rand</span> <span class="operator">=</span> String.valueOf(r.nextInt(<span class="number">1000000</span>));</span><br><span class="line">block.setBlockIndex(nextBlockIndex);</span><br><span class="line">block.setCreateTime(time);</span><br><span class="line">block.setWorkLoad(diffWorkload.getValue());</span><br><span class="line">block.setCreateTime(DateUtils.getTime());</span><br><span class="line">block.setPreBlockHash(currentBlock.getBlockHash());</span><br><span class="line">block.setRandomNumber(rand);</span><br><span class="line"><span class="type">Date</span> <span class="variable">runDate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="type">String</span> <span class="variable">blockPath</span> <span class="operator">=</span> DataUtils.getBlockPath(nextBlockIndex, runDate);<span class="comment">// gen block file path</span></span><br><span class="line">block.setPath(blockPath);</span><br><span class="line">   </span><br><span class="line"><span class="comment">//取出交易</span></span><br><span class="line">List&lt;String&gt; tradeNos = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">List&lt;Pending&gt; list = PendingServiceImpl.queryPendings();</span><br><span class="line"><span class="keyword">if</span> (list.size() != <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; list.size(); i++) &#123;</span><br><span class="line">		tradeNos.add(list.get(i).getOrderNo());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">block.setDataJson(list.toString());</span><br></pre></td></tr></table></figure>
+<p>③挖到区块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">outHash</span> <span class="operator">=</span> EncryptUtil.encryptSHA256(block.workString());</span><br><span class="line">System.out.println(outHash);</span><br><span class="line"><span class="keyword">if</span> (outHash.startsWith(diffWorkload.getValue())) &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;挖到---------------------&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>计算结果广播以及工作量验证</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">block.setBlockHash(outHash);</span><br><span class="line"><span class="keyword">for</span> (String port : map.getFs().keySet()) &#123;</span><br><span class="line">    <span class="type">Friends</span> <span class="variable">f</span> <span class="operator">=</span> map.getFs().get(port);</span><br><span class="line">    <span class="type">String</span> <span class="variable">ip</span> <span class="operator">=</span> f.getIp();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">resp</span> <span class="operator">=</span> HttpHelper.checkBlock(ip, block);</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">response</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Gson</span>().fromJson(resp, JSONObject.class);</span><br><span class="line">    <span class="keyword">if</span> (response.getCode().equals(<span class="string">&quot;1&quot;</span>)) &#123;</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">isTrue</span> <span class="operator">=</span> (Boolean) response.getO();</span><br><span class="line">        <span class="keyword">if</span> (isTrue) &#123;</span><br><span class="line">            trueCount = trueCount + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            falseCount = falseCount + <span class="number">1</span>;</span><br><span class="line">                            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(ip + <span class="string">&quot;失败&quot;</span>);</span><br><span class="line">            map.getFs().get(port).setFriendliness(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">   </span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> trueCount + falseCount;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">isTrueCountMajority</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span> (count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            isTrueCountMajority = trueCount &gt; (count / <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">   </span><br><span class="line">        <span class="keyword">if</span> (isTrueCountMajority) &#123;</span><br><span class="line">            <span class="comment">//正确结果超过半数以上</span></span><br><span class="line">   </span><br><span class="line">            <span class="comment">//将新区块记录到区块链中</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>②其他节点验证计算结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/mining/checkBlock&quot;, method = &#123;RequestMethod.POST&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;JSONObject&gt; <span class="title function_">checkBlock</span><span class="params">(<span class="meta">@RequestBody</span> Block b)</span> &#123;</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">Dictionary</span> <span class="variable">diffWorkload</span> <span class="operator">=</span> InitUtils.intiDifficulty();<span class="comment">// 字典表的工作量配置</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">blockHash</span> <span class="operator">=</span> EncryptUtil.encryptSHA256(b.workString());</span><br><span class="line">        List&lt;Block&gt; bs = BlockServiceImpl.queryBlockByBlockIndex(b.getBlockIndex());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (bs.size() != <span class="number">0</span> || Integer.valueOf(b.getBlockIndex()) - <span class="number">1</span> &lt; UpdateTimer.currentMaxBlockIndex.intValue() || !blockHash.equals(b.getBlockHash()) || !blockHash.startsWith(diffWorkload.getValue())) &#123;</span><br><span class="line">            jo.setO(<span class="literal">false</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            mining.isWork = <span class="literal">false</span>;</span><br><span class="line">            jo.setO(<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        jo.setCode(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>定时任务每秒向其他节点请求最新区块</p>
+<p>①通过已经保存的对等节点的IP进行最新区块的获取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateBlock</span><span class="params">(String blockIndex, Mining mining, MapFriends map)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">BlockDownLoad</span> <span class="variable">bdl</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">for</span>(String port:map.getFs().keySet())&#123;</span><br><span class="line">            Friends f= map.getFs().get(port);</span><br><span class="line">            String ip=f.getIp();</span><br><span class="line">            <span class="keyword">if</span> (f.getFriendliness() == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">NoticeParams</span> <span class="variable">np</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">NoticeParams</span>(blockIndex.toString(), ip,<span class="string">&quot;&quot;</span>);</span><br><span class="line">            bdl = HttpHelper.downLoadBlock(ip, <span class="number">8888</span>, np);<span class="comment">//获取区块和区块内容</span></span><br><span class="line">            <span class="keyword">if</span>(bdl == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//检测当前区块是否已经存在</span></span><br><span class="line">            <span class="type">TradeBodyPool</span> <span class="variable">tbp</span> <span class="operator">=</span> BlockBaseUtils.genTbp(bdl);</span><br><span class="line">            List&lt;Block&gt; bs=BlockServiceImpl.queryBlockByBlockIndex(bdl.getBlock().getBlockIndex());</span><br><span class="line">            <span class="keyword">if</span>(bs.size() &gt; <span class="number">0</span> )&#123;</span><br><span class="line">                deletePending(tbp);<span class="comment">//删除pending</span></span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            BlockServiceImpl.checkBlockTable(bdl.getBlock().getBlockIndex());<span class="comment">//检查表是否存在</span></span><br><span class="line"></span><br><span class="line">            BlockServiceImpl.save(bdl.getBlock());<span class="comment">//保存区块DB</span></span><br><span class="line">            BlockServiceImpl.saveBlockFile(bdl);<span class="comment">//保存区块文件</span></span><br><span class="line">            DicServiceImpl.updateDicBlockIndex(blockIndex);<span class="comment">//更新当前更新到的块号</span></span><br><span class="line">            DicServiceImpl.updateDicMainBockIndex(bdl.getMaxBlockIndex());<span class="comment">//更新当前更新到的块号</span></span><br><span class="line">            UpdateTimer.currentBlockIndex= <span class="keyword">new</span> <span class="title class_">BigInteger</span>(blockIndex) ;</span><br><span class="line">            UpdateTimer.currentMaxBlockIndex= <span class="keyword">new</span> <span class="title class_">BigInteger</span>(bdl.getMaxBlockIndex()) ;</span><br><span class="line">            deletePending(tbp);<span class="comment">//删除pending</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(bdl==<span class="literal">null</span>)&#123;</span><br><span class="line">            mining.updateComplete=<span class="literal">true</span>;</span><br><span class="line">            mining.isWork=<span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//已经更新到最高区块</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>②下载区块的具体方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> BlockDownLoad <span class="title function_">downLoadBlock</span><span class="params">(String ip, <span class="type">int</span> port, NoticeParams np)</span> &#123;</span><br><span class="line">        <span class="type">BlockDownLoad</span> <span class="variable">bdl</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BlockDownLoad</span>();</span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.isNotBlank(ip)) &#123;</span><br><span class="line">            url = <span class="string">&quot;http://&quot;</span> + ip + <span class="string">&quot;:&quot;</span> + port + <span class="string">&quot;/mining/server/block.zip&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            url = <span class="string">&quot;http://&quot;</span> + np.getIp() + <span class="string">&quot;:&quot;</span> + <span class="string">&quot;8001&quot;</span> + <span class="string">&quot;/mining/server/block.zip&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// create Httpclient object</span></span><br><span class="line">        <span class="type">CloseableHttpClient</span> <span class="variable">httpClient</span> <span class="operator">=</span> HttpClients.createDefault();</span><br><span class="line">        <span class="type">CloseableHttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">ZipInputStream</span> <span class="variable">zis</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">HttpPost</span> <span class="variable">httpPost</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Download Block &quot;</span>);</span><br><span class="line">            httpPost = <span class="keyword">new</span> <span class="title class_">HttpPost</span>(url);</span><br><span class="line">            httpPost.setHeader(<span class="string">&quot;Content-type&quot;</span>, <span class="string">&quot;application/json; charset=utf-8&quot;</span>);</span><br><span class="line">            httpPost.setHeader(<span class="string">&quot;Connection&quot;</span>, <span class="string">&quot;Close&quot;</span>);</span><br><span class="line">            httpPost.addHeader(<span class="string">&quot;Accept-Encoding&quot;</span>, <span class="string">&quot;GZIP&quot;</span>);</span><br><span class="line">            <span class="type">RequestConfig</span> <span class="variable">requestConfig</span> <span class="operator">=</span> RequestConfig.custom().setConnectTimeout(<span class="number">5000</span>).setConnectionRequestTimeout(<span class="number">15000</span>).setSocketTimeout(<span class="number">15000</span>).build();</span><br><span class="line">            httpPost.setConfig(requestConfig);</span><br><span class="line">            <span class="type">StringEntity</span> <span class="variable">entity</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringEntity</span>(np.toJSONString(), Charset.forName(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            entity.setContentEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            entity.setContentType(<span class="string">&quot;application/json&quot;</span>);</span><br><span class="line">            httpPost.setEntity(entity);</span><br><span class="line">            response = httpClient.execute(httpPost);</span><br><span class="line">            <span class="comment">//get zip</span></span><br><span class="line">            zis = <span class="keyword">new</span> <span class="title class_">ZipInputStream</span>(response.getEntity().getContent(), Charset.forName(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">            <span class="type">ZipEntry</span> <span class="variable">ze</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="type">Block</span> <span class="variable">block</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="type">String</span> <span class="variable">blockFileStr</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">            <span class="type">String</span> <span class="variable">maxIndex</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">            <span class="keyword">while</span> ((ze = zis.getNextEntry()) != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="string">&quot;blockObject&quot;</span>.equals(ze.getName())) &#123;</span><br><span class="line">                    <span class="comment">//区块对象</span></span><br><span class="line">                    block = BlockServiceImpl.getBlockObeject(zis);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;maxblockindex&quot;</span>.equals(ze.getName())) &#123;</span><br><span class="line">                    <span class="comment">//获得最大块编号</span></span><br><span class="line">                    maxIndex = BlockServiceImpl.getMaxBlockIndexStr(zis);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;tokblockfile&quot;</span>.equals(ze.getName())) &#123;</span><br><span class="line">                    <span class="comment">//获得区块文件</span></span><br><span class="line">                    blockFileStr = BlockServiceImpl.getBlockFileStr(zis);</span><br><span class="line">                    System.out.println(blockFileStr);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (block == <span class="literal">null</span> || StringUtils.isBlank(blockFileStr)) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//throw new Exception(&quot;down block is not complete.&quot;);</span></span><br><span class="line">                System.out.println(<span class="string">&quot;当前block为空，无需下载&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            bdl.setBlock(block);</span><br><span class="line">            bdl.setBlockFileStr(blockFileStr);</span><br><span class="line">            bdl.setMaxBlockIndex(maxIndex);</span><br><span class="line">            <span class="keyword">return</span> bdl;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">//e.printStackTrace();</span></span><br><span class="line">            System.out.println(<span class="string">&quot;连接不到对等节点：&quot;</span> + ip);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (httpPost != <span class="literal">null</span>) &#123;</span><br><span class="line">                    httpPost.releaseConnection();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (httpClient != <span class="literal">null</span>) &#123;</span><br><span class="line">                    httpClient.close();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (response != <span class="literal">null</span>)</span><br><span class="line">                    response.close();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>   ③读取流代码</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bos = <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>(); <span class="comment">// 创建一个字节数组输出流</span></span><br><span class="line"><span class="type">byte</span>[] buffer = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">512</span>];     <span class="comment">// 创建一个大小为 512 字节的缓冲区</span></span><br><span class="line"><span class="type">int</span> <span class="variable">len</span> <span class="operator">=</span> <span class="number">0</span>;                       <span class="comment">// 初始化读取长度为 0</span></span><br><span class="line"><span class="keyword">while</span> ((len = zis.read(buffer)) != -<span class="number">1</span>) &#123; <span class="comment">// 当还有数据可读时继续循环</span></span><br><span class="line">    bos.write(buffer, <span class="number">0</span>, len); <span class="comment">// 将已读取的数据写入到字节数组输出流中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>   ④下载区块的接口</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(value = &quot;/mining/server/block.zip&quot;)</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">blockdownload</span><span class="params">(HttpServletResponse response, <span class="meta">@RequestBody</span> NoticeParams noticeParams)</span> &#123;</span><br><span class="line">        <span class="type">OutputStream</span> <span class="variable">responseBody</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="type">ZipOutputStream</span> <span class="variable">zos</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            List&lt;Block&gt; bs = BlockServiceImpl.queryBlockByBlockIndex(noticeParams.getBn());</span><br><span class="line">            <span class="type">Block</span> <span class="variable">b</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            <span class="keyword">if</span> (bs != <span class="literal">null</span> &amp;&amp; bs.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                b = bs.get(<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span> (b != <span class="literal">null</span>) &#123;</span><br><span class="line">                    zos = <span class="keyword">new</span> <span class="title class_">ZipOutputStream</span>(response.getOutputStream());</span><br><span class="line">                    <span class="comment">//写入块对象</span></span><br><span class="line">                    zos.putNextEntry(<span class="keyword">new</span> <span class="title class_">ZipEntry</span>(<span class="string">&quot;blockObject&quot;</span>));</span><br><span class="line">                    <span class="type">String</span> <span class="variable">boStr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Gson</span>().toJson(b);</span><br><span class="line">                    <span class="type">byte</span>[] b_str = boStr.getBytes();</span><br><span class="line">                    zos.write(b_str, <span class="number">0</span>, b_str.length);</span><br><span class="line">                    <span class="comment">//写入块文件</span></span><br><span class="line">                    zos.putNextEntry(<span class="keyword">new</span> <span class="title class_">ZipEntry</span>(<span class="string">&quot;tokblockfile&quot;</span>));</span><br><span class="line">                    <span class="type">String</span> <span class="variable">blockString</span> <span class="operator">=</span> DataUtils.getBlockString(DataUtils.getRelativePath(b.getPath()));</span><br><span class="line">                    <span class="type">byte</span>[] bs_str = blockString.getBytes();</span><br><span class="line">                    zos.write(bs_str, <span class="number">0</span>, bs_str.length);</span><br><span class="line">                    <span class="comment">//写入主链上最高的编号</span></span><br><span class="line">                    zos.putNextEntry(<span class="keyword">new</span> <span class="title class_">ZipEntry</span>(<span class="string">&quot;maxblockindex&quot;</span>));</span><br><span class="line">                    <span class="type">Dictionary</span> <span class="variable">dic</span> <span class="operator">=</span> DicServiceImpl.queryDic(Dictionary.MODUAL_BLOCK, Dictionary.CURRENTBLOCKINDEX);</span><br><span class="line">                    <span class="type">byte</span>[] m_str = dic.getValue().getBytes();</span><br><span class="line">                    zos.write(m_str, <span class="number">0</span>, m_str.length);</span><br><span class="line"></span><br><span class="line">                    zos.closeEntry();</span><br><span class="line">                    zos.close();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.getMessage();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (responseBody != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    responseBody.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.getMessage();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (zos != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    zos.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    e.getMessage();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>数据库的保存以及修改</p>
+<p>①保存数据save</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">save</span><span class="params">(Block block)</span> &#123;</span><br><span class="line">    <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">tableIndex</span> <span class="operator">=</span> DataUtils.getBlockSerial(block.getBlockIndex());</span><br><span class="line">        connection = SQLiteHelper.getConnection();</span><br><span class="line">        connection.setAutoCommit(<span class="literal">false</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;insert into [block&quot;</span> + tableIndex + <span class="string">&quot;]([blockIndex],[preBlockHash],[path],[createTime],[blockHash],[randomNumber],[onMingChain]) values(?,?,?,?,?,?,?);&quot;</span>;</span><br><span class="line">        <span class="type">PreparedStatement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.prepareStatement(sql);</span><br><span class="line">        statement.setString(<span class="number">1</span>, block.getBlockIndex() + <span class="string">&quot;&quot;</span>);</span><br><span class="line">        statement.setString(<span class="number">2</span>, block.getPreBlockHash());</span><br><span class="line">        statement.setString(<span class="number">3</span>, block.getPath());</span><br><span class="line">        statement.setString(<span class="number">4</span>, block.getCreateTime());</span><br><span class="line">        statement.setString(<span class="number">5</span>, block.getBlockHash());</span><br><span class="line">        statement.setString(<span class="number">6</span>, block.getRandomNumber());</span><br><span class="line">        statement.setInt(<span class="number">7</span>, <span class="number">1</span>);</span><br><span class="line">        statement.execute();</span><br><span class="line">        connection.commit();</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">if</span> (connection != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                connection.rollback();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e1) &#123;</span><br><span class="line">                e.getMessage();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        e.getMessage();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        SQLiteHelper.close(connection);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>②修改数据update</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">update</span><span class="params">(Dictionary dic)</span> &#123;</span><br><span class="line">		<span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			connection = SQLiteHelper.getConnection();</span><br><span class="line">			connection.setAutoCommit(<span class="literal">false</span>);</span><br><span class="line">			<span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;update [dictionary] set [value] = ? where [module]=? and [key]=?&quot;</span>;</span><br><span class="line">			<span class="type">PreparedStatement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.prepareStatement(sql);</span><br><span class="line">			statement.setString(<span class="number">1</span>, dic.getValue());</span><br><span class="line">			statement.setString(<span class="number">2</span>, dic.getModule());</span><br><span class="line">			statement.setString(<span class="number">3</span>, dic.getKey());</span><br><span class="line">			statement.execute();</span><br><span class="line">			connection.commit();</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">			<span class="keyword">if</span>(connection != <span class="literal">null</span>) &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					connection.rollback();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e1) &#123;</span><br><span class="line">					e.getMessage();</span><br><span class="line"></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			e.getMessage();</span><br><span class="line"></span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			SQLiteHelper.close(connection);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>③删除数据deletePending</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">deletePendings</span><span class="params">(List&lt;String&gt; tradeNos)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(tradeNos == <span class="literal">null</span> || tradeNos.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            connection = SQLiteHelper.getConnection();</span><br><span class="line">            connection.setAutoCommit(<span class="literal">false</span>);</span><br><span class="line">            <span class="type">PreparedStatement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.prepareStatement(<span class="string">&quot;delete from [pending] where [orderNo]=?&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i&lt; tradeNos.size(); i++) &#123;</span><br><span class="line">                System.out.println(tradeNos.get(i));</span><br><span class="line">                statement.setString(<span class="number">1</span>, tradeNos.get(i));</span><br><span class="line">                statement.addBatch();</span><br><span class="line">                <span class="keyword">if</span>(i % <span class="number">100</span> ==<span class="number">0</span>) &#123;</span><br><span class="line">                    statement.executeBatch();</span><br><span class="line">                    statement.clearBatch();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            statement.executeBatch();</span><br><span class="line">            statement.clearBatch();</span><br><span class="line">            connection.commit();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(connection != <span class="literal">null</span>) &#123;</span><br><span class="line">                    connection.rollback();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e1) &#123;</span><br><span class="line">                e.getMessage();</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            SQLiteHelper.close(connection);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>发送交易</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;/data/trade&quot;, method = &#123;RequestMethod.POST&#125;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;JSONObject&gt; <span class="title function_">trade</span><span class="params">(<span class="meta">@RequestBody</span> TradeObject tradeObject)</span> &#123;</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">        List&lt;Pending&gt; pes = PendingServiceImpl.queryPendings();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">no</span> <span class="operator">=</span> PendingServiceImpl.genTradeNo(tradeObject);</span><br><span class="line">        tradeObject.setHashNo(no);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">genTradeNo</span> <span class="operator">=</span> PendingServiceImpl.genTradeNo(tradeObject);</span><br><span class="line">        <span class="keyword">for</span> (Pending p : pes) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p.getOrderNo().equals(genTradeNo)) &#123;</span><br><span class="line">                jo.setCode(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">                jo.setMsg(<span class="string">&quot;交易已存在&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//验证钱包地址</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="type">String</span> <span class="variable">body</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Gson</span>().toJson(tradeObject);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            PendingServiceImpl.validateTradeNo(tradeObject);</span><br><span class="line">            <span class="type">Pending</span> <span class="variable">pending</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Pending</span>();</span><br><span class="line">            pending.setTradeBody(body);</span><br><span class="line">            pending.setCreateTime(tradeObject.getJsoncreatetime());</span><br><span class="line">            pending.setOrderNo(tradeObject.getHashNo());</span><br><span class="line">            pending.setTradeType(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">            PendingServiceImpl.save(pending);</span><br><span class="line">            <span class="keyword">for</span> (String port : map.getFs().keySet()) &#123;</span><br><span class="line">                <span class="type">Friends</span> <span class="variable">f</span> <span class="operator">=</span> map.getFs().get(port);</span><br><span class="line">                <span class="type">String</span> <span class="variable">ip</span> <span class="operator">=</span> f.getIp();</span><br><span class="line">                <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://&quot;</span> + ip + <span class="string">&quot;:8001/data/trade&quot;</span>;</span><br><span class="line">                restTemplate.postForEntity(url, tradeObject, TradeObject.class);</span><br><span class="line">            &#125;</span><br><span class="line">            jo.setCode(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">            jo.setMsg(<span class="string">&quot;成功&quot;</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.out.println(e.getMessage());</span><br><span class="line">            jo.setCode(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">            jo.setMsg(<span class="string">&quot;失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+
+<div>
+  
+    
+<div>
+    
+        <div style="text-align:center;font-size:14px;">-------------本文结束感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        <div class="reward-container">
+  <div>情不知从所起，一往而深！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Likt 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Likt
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://likt11.github.io/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%B8%89%EF%BC%9A%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5/" title="区块链实训三：共识机制学习实践">http://likt11.github.io/2025/01/12/区块链实训三：共识机制学习实践/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag"><i class="fa fa-tag"></i> 区块链</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E5%9B%9B%EF%BC%9A%E7%94%9F%E6%88%90%E9%92%B1%E5%8C%85%E5%9C%B0%E5%9D%80%E5%85%AC%E9%92%A5%E7%A7%81%E9%92%A5%EF%BC%8C%E4%BD%BF%E7%94%A8mysql%E4%BB%A5%E5%8F%8AJava%E7%9A%84orm%E6%A1%86%E6%9E%B6mybatis/" rel="prev" title="区块链实训四：生成钱包地址公钥私钥，使用mysql以及Java的orm框架mybatis">
+      <i class="fa fa-chevron-left"></i> 区块链实训四：生成钱包地址公钥私钥，使用mysql以及Java的orm框架mybatis
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%BA%8C%EF%BC%9A%E5%AD%A6%E4%B9%A0P2P%E7%9F%A5%E8%AF%86%EF%BC%8C%E5%B9%B6%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%B1%80%E5%9F%9F%E7%BD%91p2p%E4%B8%8B%E8%BD%BD%E5%99%A8/" rel="next" title="区块链实训二：学习P2P知识，并搭建一个局域网p2p下载器">
+      区块链实训二：学习P2P知识，并搭建一个局域网p2p下载器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E8%AE%AD%E6%8A%A5%E5%91%8A%E4%B8%89"><span class="nav-number">1.</span> <span class="nav-text">实训报告三</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">一、实验目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">二、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.3.</span> <span class="nav-text">三、实验步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C%E4%B8%8E%E8%AE%A8%E8%AE%BA"><span class="nav-number">1.4.</span> <span class="nav-text">四、实验结果与讨论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">1.5.</span> <span class="nav-text">五、总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E4%B8%8A%E4%BB%A3%E7%A0%81"><span class="nav-number">1.6.</span> <span class="nav-text">附上代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Likt"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Likt</p>
+  <div class="site-description" itemprop="description">请你务必，一而再，再而三，三而不竭，千次万次，毫不犹豫地救自己于这世间水火。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Likt</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/08/2024 10:11:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '5CGDgZL88OYzRNYj1PLjmcBc-gzGzoHsz',
+      appKey     : 'N0AqOmhJqbysjAOoqieRu6Jv',
+      placeholder: "期待与您的交流！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #4D4D4C;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #F7F7F7;
+      background-image: linear-gradient(#F7F7F7, #F7F7F7);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('post.copy_button').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('post.copy_success')
+          else $(this).text('post.copy_failure')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('post.copy_button')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>

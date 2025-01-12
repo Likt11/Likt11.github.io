@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="KRqm7Lu_cZK-ZkctKdb9ybG_kBgFXWDh41mUPXdJNd8">
+  <meta name="msvalidate.01" content="true">
+  <meta name="yandex-verification" content="true">
+  <meta name="baidu-site-verification" content="codeva-KIwwTfWo4R">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"likt11.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideDownBigOut"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="实训报告六课程：区块链实训        实验名称：项目实战，茶叶生产上链     专业：网络空间安全      班级：2班 学号：121122022070    姓名：李婷香      实验日期：2024.11.06 一、实验目的 掌握springboot基本框架：dao层、service层和controller层； 前后端综合分析产品上链流程； 项目开发基本框架；  二、实验环境 Window">
+<meta property="og:type" content="article">
+<meta property="og:title" content="溯源项目实战">
+<meta property="og:url" content="http://likt11.github.io/2025/01/12/%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/index.html">
+<meta property="og:site_name" content="Likt&#39;s Blog">
+<meta property="og:description" content="实训报告六课程：区块链实训        实验名称：项目实战，茶叶生产上链     专业：网络空间安全      班级：2班 学号：121122022070    姓名：李婷香      实验日期：2024.11.06 一、实验目的 掌握springboot基本框架：dao层、service层和controller层； 前后端综合分析产品上链流程； 项目开发基本框架；  二、实验环境 Window">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102164106441-17305368675605.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103205640695.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102154719521-17305336407832.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102155016624-17305338186193.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102155336364-17305340185534.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102165312487.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102165428448.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103211910291.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103215331921.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103215638544.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103215545204.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103220100980.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103220359152.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103220408896.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103233624269.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103233654860.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241106230508022.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241106230601267.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241106230622413.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241106230649961.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103233624269.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241103220100980.png">
+<meta property="og:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102165428448.png">
+<meta property="article:published_time" content="2025-01-12T09:02:19.000Z">
+<meta property="article:modified_time" content="2025-01-12T09:02:19.665Z">
+<meta property="article:author" content="Likt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="e:\Git\MyBlog\source\_drafts\%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98.assets\image-20241102164106441-17305368675605.png">
+
+<link rel="canonical" href="http://likt11.github.io/2025/01/12/%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>溯源项目实战 | Likt's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Likt's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Likt's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">天空一直都在，是云来了又去。</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://likt11.github.io/2025/01/12/%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Likt">
+      <meta itemprop="description" content="请你务必，一而再，再而三，三而不竭，千次万次，毫不犹豫地救自己于这世间水火。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Likt's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          溯源项目实战
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-01-12 17:02:19" itemprop="dateCreated datePublished" datetime="2025-01-12T17:02:19+08:00">2025-01-12</time>
+            </span>
+
+          
+            <span id="/2025/01/12/%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="post-meta-item leancloud_visitors" data-flag-title="溯源项目实战" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2025/01/12/%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2025/01/12/%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>17 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="实训报告六"><a href="#实训报告六" class="headerlink" title="实训报告六"></a>实训报告六</h1><p><strong>课程：区块链实训        实验名称：项目实战，茶叶生产上链    </strong></p>
+<p><strong>专业：网络空间安全      班级：2班</strong></p>
+<p><strong>学号：121122022070    姓名：李婷香</strong>      <strong>实验日期：2024.11.06</strong></p>
+<h2 id="一、实验目的"><a href="#一、实验目的" class="headerlink" title="一、实验目的"></a>一、实验目的</h2><ol>
+<li>掌握springboot基本框架：dao层、service层和controller层；</li>
+<li>前后端综合分析产品上链流程；</li>
+<li>项目开发基本框架；</li>
+</ol>
+<h2 id="二、实验环境"><a href="#二、实验环境" class="headerlink" title="二、实验环境"></a>二、实验环境</h2><ul>
+<li>Windows 11</li>
+<li>IDEA java、maven、springboot</li>
+<li>navicat</li>
+<li>postman</li>
+</ul>
+<h2 id="三、实验步骤"><a href="#三、实验步骤" class="headerlink" title="三、实验步骤"></a>三、实验步骤</h2><h3 id="一）项目背景"><a href="#一）项目背景" class="headerlink" title="一）项目背景"></a>一）项目背景</h3><ol>
+<li>茶叶在全球范围内享有广泛的消费市场，产业市场规模持续增长，现代消费者对茶叶的需求不仅限于口感和品质，越来越重视产品的来源和生产过程。</li>
+<li>常见问题：假冒伪劣产品；信息不透明；质量标准不一。</li>
+</ol>
+<h3 id="二）区块链的作用与局限性"><a href="#二）区块链的作用与局限性" class="headerlink" title="二）区块链的作用与局限性"></a>二）区块链的作用与局限性</h3><ol>
+<li>茶叶安全与区块链的作用<ul>
+<li>追溯能力</li>
+<li>透明记录：确保了数据的透明性和不可篡改性</li>
+</ul>
+</li>
+<li>区块链的局限性<ul>
+<li>质量控制在源头</li>
+<li>后续措施依赖人工</li>
+<li>需要完整的生态系统</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>区块链在食品安全方面的作用主要体现在追溯和透明度上，但解决质量问题仍需要综合的质量管理和监管措施。</li>
+<li>区块链提供的工具可以有效支持这些措施，但不是解决方案的全部。</li>
+<li><strong>区块链保障数据安全，而不是溯源商品的安全。</strong></li>
+</ul>
+</li>
+</ol>
+<h3 id="三）项目需求分析"><a href="#三）项目需求分析" class="headerlink" title="三）项目需求分析"></a>三）项目需求分析</h3><ol>
+<li><p>用户角色：茶农、加工商、物流公司和消费者。</p>
+</li>
+<li><p>功能需求：</p>
+<ul>
+<li>茶叶信息登记</li>
+<li>生产和加工记录</li>
+<li>物流跟踪</li>
+<li>消费者查询系统</li>
+</ul>
+</li>
+<li><p>架构设计</p>
+<p>| 前端展示层 | html    css    javascript    jquery |<br>| ————— | —————————————————- |<br>| 服务层     | 聚合服务                            |<br>| 存储层     | mysql数据库      区块文件           |</p>
+</li>
+<li><p>数据模型</p>
+<p>区块表：id,blockIndex,currentBlockin记录区块号，用于区块更新</p>
+<p>产品表：product_name,product_desc,creat_time,address</p>
+<p>溯源码表：记录溯源码信息</p>
+<p>code,create_time,product_name,address,img_url（二维码链接）</p>
+<p>上链记录表：from,to,content,hash_no,block_index,create_time,code,product_name,</p>
+</li>
+</ol>
+<h3 id="四）技术选型"><a href="#四）技术选型" class="headerlink" title="四）技术选型"></a>四）技术选型</h3><ol>
+<li>开发工具<ul>
+<li>代码开发工具：IDEA</li>
+<li>数据库可视化工具：navicat</li>
+<li>接口测试工具：postman</li>
+</ul>
+</li>
+<li>系统环境<ul>
+<li>jdk11</li>
+<li>mysql</li>
+</ul>
+</li>
+<li>前端技术：html+css+javascript,jquery</li>
+<li>后端技术：spring boot，mybatis</li>
+</ol>
+<h3 id="五）代码"><a href="#五）代码" class="headerlink" title="五）代码"></a>五）代码</h3><ol>
+<li><p>```bash<br>git clone <a target="_blank" rel="noopener" href="https://gitee.com/daitoulin/suyuan_project.git">https://gitee.com/daitoulin/suyuan_project.git</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 分析suyuan_project项目框架：component主键-有定时功能，templates文件夹中存放网页框架，</span><br><span class="line"></span><br><span class="line">   &lt;img src=&quot;E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241106002022044.png&quot; alt=&quot;image-20241106002022044&quot; style=&quot;zoom:33%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">3. 配置文件application.properties，修改mysql数据库密码，node.ip可以写任意一个启动节点的IP；增加开启模板引擎，需要引入spring-boot-starter-thymeleaf包才能使用，HTML模板；</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="找到数据库对应的-Mapper-xml文件"><a href="#找到数据库对应的-Mapper-xml文件" class="headerlink" title="找到数据库对应的*Mapper.xml文件"></a>找到数据库对应的*Mapper.xml文件</h1><p>mybatis.mapper-locations=classpath:/mybatis-mapper/*Mapper.xml</p>
+<h1 id="开启驼峰命名"><a href="#开启驼峰命名" class="headerlink" title="开启驼峰命名"></a>开启驼峰命名</h1><p>mybatis.configuration.map-underscore-to-camel-case=true</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="开启模板引擎，需要引入spring-boot-starter-thymeleaf包才能使用"><a href="#开启模板引擎，需要引入spring-boot-starter-thymeleaf包才能使用" class="headerlink" title="开启模板引擎，需要引入spring-boot-starter-thymeleaf包才能使用"></a>开启模板引擎，需要引入spring-boot-starter-thymeleaf包才能使用</h1><p>spring.thymeleaf.prefix=classpath:/templates/<br>spring.thymeleaf.mode=HTML</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. 关于新增HTML页面：templates文件夹中新建block.html，在htmlcontroller中添加一个，项目要重启才能生效，可以通过http://localhost:8007/block对新建的页面进行访问。</span><br><span class="line"></span><br><span class="line">   ```html</span><br><span class="line">   &lt;!--block.html文件--&gt;</span><br><span class="line">   &lt;!DOCTYPE html&gt;</span><br><span class="line">   &lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">   &lt;head&gt;</span><br><span class="line">       &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">       &lt;title&gt;区块&lt;/title&gt;</span><br><span class="line">   &lt;/head&gt;</span><br><span class="line">   &lt;body&gt;</span><br><span class="line">       &lt;div&gt;hello likt!welcome to my block&lt;/div&gt;</span><br><span class="line">   &lt;/body&gt;</span><br><span class="line">   &lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/block&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">block</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;block&quot;</span>;</span><br><span class="line">    &#125;<span class="comment">//htmlcontroller中新增一个方法</span></span><br></pre></td></tr></table></figure>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241102164106441-17305368675605.png" alt="image-20241102164106441" style="zoom: 67%;" /></p>
+</li>
+<li><p>启动引导节点、两个block_contract节点</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103205640695.png" alt="image-20241103205640695" style="zoom:50%;" /></p>
+</li>
+<li><p>访问<a target="_blank" rel="noopener" href="http://localhost:8007/index">http://localhost:8007/index</a></p>
+</li>
+<li><p>使用配对的钱包地址和私钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;code&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;msg&quot;: &quot;生成钱包成功&quot;,</span><br><span class="line">    &quot;o&quot;: &#123;</span><br><span class="line">        &quot;publicKey&quot;: &quot;13aae02db917ba3cf26eb5201f55d9fe094be2ad8df09437918c3d278adde0af77ae39ae6a1575d592536287a78b58594638951bd7cc3f04153381f0a0fa6618&quot;,</span><br><span class="line">        &quot;privateKey&quot;: &quot;8676da2a245a145b1cc7e158d6b2221e892478c386dc0dcc28b9ed6772b08975&quot;,</span><br><span class="line">        &quot;address&quot;: &quot;0x4dd32f368a54e39ee7da24d6eb5ebecf7d062eb5&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新增产品</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241102154719521-17305336407832.png" alt="image-20241102154719521" style="zoom: 33%;" /></p>
+</li>
+<li><p>新增溯源码，输入私钥</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241102155016624-17305338186193.png" alt="image-20241102155016624" style="zoom: 50%;" /></p>
+</li>
+<li><p>查看溯源码</p>
+</li>
+<li><p>新增流程1</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241102155336364-17305340185534.png" alt="image-20241102155336364" style="zoom:50%;" /></p>
+</li>
+<li><p>新增流程2</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241102165312487.png" alt="image-20241102165312487" style="zoom:50%;" /></p>
+</li>
+<li><p>打开navicat，链接blockchain.db可以查看到pending表中的两个上链信息</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241102165428448.png" alt="image-20241102165428448" style="zoom:50%;" /></p>
+</li>
+<li><p>两个block_contract节点开始挖矿/starMining</p>
+</li>
+<li><p>从block_contract的browser文件夹进入index.html，进入挖矿后台，挖到交易信息</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103211910291.png" alt="image-20241103211910291" style="zoom:50%;" /></p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103215331921.png" alt="image-20241103215331921" style="zoom:50%;" /></p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103215638544.png" alt="image-20241103215638544" style="zoom:50%;" /></p>
+</li>
+<li><p>增加流程时，打开开发者工具，查看到toChain的信息</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103215545204.png" alt="image-20241103215545204" style="zoom:50%;" /></p>
+</li>
+<li><p>当新增成功，在开发者工具中可以查看到toChain，依次对应代码中的上链接口。</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103220100980.png" alt="image-20241103220100980" style="zoom:50%;" /></p>
+</li>
+<li><p>使用postman，toChain接口，进行新增流程如下图</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103220359152.png" alt="image-20241103220359152" style="zoom:50%;" /></p>
+</li>
+<li><p>可以从区块号93中看到刚刚新增流程操作均上链成功</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103220408896.png" alt="image-20241103220408896" style="zoom:50%;" /></p>
+</li>
+<li><p>下载图片，使用<a target="_blank" rel="noopener" href="https://cli.im/text">草料二维码工具</a>，对其进行扫描，获取到链接，可以看到溯源结果如下</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103233624269.png" alt="image-20241103233624269"></p>
+</li>
+<li><p>点击其中的流程，查看详细信息。</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103233654860.png" alt="image-20241103233654860"></p>
+</li>
+<li><p>导入suyuan.sql新建数据库，查看数据模型—-四个数据表如下</p>
+<p>①t_block区块表：记录区块号，用于区块更新</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241106230508022.png" alt="image-20241106230508022" style="zoom:50%;" /></p>
+<p>②t_chain_data上链数据表：记录上传到区块链的信息</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241106230601267.png" alt="image-20241106230601267"></p>
+<p>③t_code溯源码表：记录溯源码信息</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241106230622413.png" alt="image-20241106230622413"></p>
+<p>④t_product产品表：记录产品信息</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241106230649961.png" alt="image-20241106230649961"></p>
+</li>
+<li><p>项目启动类：<code>SuyuanApplication.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.suyuan;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.spring.annotation.MapperScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.scheduling.annotation.EnableScheduling;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.example.suyuan.dao&quot;)</span><span class="comment">//扫描这个包下的文件，才能让mybatis正常运行</span></span><br><span class="line"><span class="meta">@EnableScheduling</span><span class="comment">//启动定时任务功能</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SuyuanApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(SuyuanApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上链接口完整任务</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mask&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modelBody&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span>新增流程<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;formItem&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">label</span>&gt;</span>流程名:<span class="tag">&lt;/<span class="name">label</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;processName&quot;</span> <span class="attr">name</span>=<span class="string">&quot;processName&quot;</span> <span class="attr">aria-label</span>=<span class="string">&quot;流程名 &quot;</span>  <span class="attr">placeholder</span>=<span class="string">&quot;流程名&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;formItem&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">label</span>&gt;</span>流程内容:<span class="tag">&lt;/<span class="name">label</span>&gt;</span> <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span> <span class="attr">name</span>=<span class="string">&quot;content&quot;</span> <span class="attr">aria-label</span>=<span class="string">&quot;流程内容 &quot;</span>  <span class="attr">placeholder</span>=<span class="string">&quot;流程内容&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;btnBox&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn danger&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;closeModal()&quot;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn primary&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;handleConfirm()&quot;</span>&gt;</span>提交<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">let</span> loading = <span class="literal">false</span></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">function</span> <span class="title function_">handleConfirm</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span>(loading) <span class="keyword">return</span></span></span><br><span class="line"><span class="language-javascript">        loading = <span class="literal">true</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> processName = $(<span class="string">&#x27;#processName&#x27;</span>).<span class="title function_">val</span>()</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> content = $(<span class="string">&#x27;#content&#x27;</span>).<span class="title function_">val</span>()</span></span><br><span class="line"><span class="language-javascript">        $.<span class="title function_">ajax</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>: <span class="string">&#x27;/toChain&#x27;</span>, <span class="comment">// API 的 URL 地址</span></span></span><br><span class="line"><span class="language-javascript">            <span class="attr">type</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="comment">// 请求类型，可以是 GET, POST, PUT, DELETE 等</span></span></span><br><span class="line"><span class="language-javascript">            <span class="attr">contentType</span>: <span class="string">&#x27;application/json&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">data</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">                processName,</span></span><br><span class="line"><span class="language-javascript">                content,</span></span><br><span class="line"><span class="language-javascript">                privateKey,</span></span><br><span class="line"><span class="language-javascript">                code</span></span><br><span class="line"><span class="language-javascript">            &#125;),</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">success</span>: <span class="keyword">function</span>(<span class="params">data</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">// 在这里处理从服务器返回的数据</span></span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">const</span> &#123; code, msg &#125; = data</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span>(code === <span class="string">&#x27;1&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="title function_">closeModal</span>()</span></span><br><span class="line"><span class="language-javascript">                    <span class="title function_">alert</span>(<span class="string">&#x27;新增成功&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">                &#125; <span class="keyword">else</span>  &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="title function_">alert</span>(msg)</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">                loading = <span class="literal">false</span></span></span><br><span class="line"><span class="language-javascript">            &#125;,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">error</span>: <span class="keyword">function</span>(<span class="params">jqXHR, textStatus, errorThrown</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="comment">// 处理请求失败的情况</span></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Error: &#x27;</span> + textStatus + <span class="string">&#x27; &#x27;</span> + errorThrown);</span></span><br><span class="line"><span class="language-javascript">                loading = <span class="literal">false</span></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>ChainController.java</code>控制层</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/toChain&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> ResponseEntity&lt;JSONObject&gt; <span class="title function_">toChain</span><span class="params">(<span class="meta">@RequestBody</span> ChainDataBo chainDataBo)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="type">JSONObject</span> <span class="variable">jo</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;&quot;</span>.equals(chainDataBo.getCode()) || chainDataBo.getCode() == <span class="literal">null</span>)&#123;</span><br><span class="line">            jo.setCode(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">            jo.setMsg(<span class="string">&quot;溯源码不能为空&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;&quot;</span>.equals(chainDataBo.getPrivateKey()) || chainDataBo.getPrivateKey() == <span class="literal">null</span>)&#123;</span><br><span class="line">            jo.setCode(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">            jo.setMsg(<span class="string">&quot;钱包私钥不能为空&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;&quot;</span>.equals(chainDataBo.getContent()) || chainDataBo.getContent() == <span class="literal">null</span>)&#123;</span><br><span class="line">            jo.setCode(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">            jo.setMsg(<span class="string">&quot;内容不能为空&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;&quot;</span>.equals(chainDataBo.getProcessName()) || chainDataBo.getProcessName() == <span class="literal">null</span>)&#123;</span><br><span class="line">            jo.setCode(<span class="string">&quot;-1&quot;</span>);</span><br><span class="line">            jo.setMsg(<span class="string">&quot;流程名不能为空&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">TCode</span> <span class="variable">tCode</span> <span class="operator">=</span> codeDao.queryByCode(chainDataBo.getCode());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="type">TChainData</span> <span class="variable">tChainData</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TChainData</span>();</span><br><span class="line">        tChainData.setFrom(tCode.getAddress());</span><br><span class="line">        tChainData.setTo(<span class="string">&quot;system&quot;</span>);</span><br><span class="line">        tChainData.setContent(chainDataBo.getContent());</span><br><span class="line">        tChainData.setCreateTime(DateUtils.getTime());</span><br><span class="line">        tChainData.setCode(tCode.getCode());</span><br><span class="line">        tChainData.setProductName(tCode.getProductName());</span><br><span class="line">        tChainData.setProcessName(chainDataBo.getProcessName());</span><br><span class="line">        tChainData.setChainStatus(<span class="string">&quot;0&quot;</span>);</span><br><span class="line">        tChainData.setBlockIndex(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//String jsonStr = new Gson().toJson(tChainData.toString());</span></span><br><span class="line">        <span class="type">Gson</span> <span class="variable">gson</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GsonBuilder</span>()</span><br><span class="line">                .disableHtmlEscaping() <span class="comment">// 禁用 HTML 转义</span></span><br><span class="line">                .create();</span><br><span class="line">        <span class="type">String</span> <span class="variable">jsonStr</span> <span class="operator">=</span> gson.toJson(tChainData);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="type">BigInteger</span> <span class="variable">pri</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigInteger</span>(chainDataBo.getPrivateKey(), <span class="number">16</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">TradeObject</span> <span class="variable">tradeObject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TradeObject</span>();</span><br><span class="line">        tradeObject.setFrom(tCode.getAddress());</span><br><span class="line">        tradeObject.setTo(<span class="string">&quot;system&quot;</span>);</span><br><span class="line">        tradeObject.setType(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        tradeObject.setContent(jsonStr);</span><br><span class="line">        tradeObject.setJsoncreatetime(DateUtils.getTime());</span><br><span class="line">        tradeObject.setObjToString(tradeObject.toString());</span><br><span class="line"></span><br><span class="line">        Sign.<span class="type">SignatureData</span> <span class="variable">signatureData</span> <span class="operator">=</span> EthUtils.signMessage(tradeObject.toString(),pri);</span><br><span class="line">        <span class="type">String</span> <span class="variable">sign</span> <span class="operator">=</span> EthUtils.getSignStr(signatureData);</span><br><span class="line">        tradeObject.setSign(sign);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">hashNo</span> <span class="operator">=</span> PendingUtils.genTradeNo(tradeObject);</span><br><span class="line">        tChainData.setHashNo(hashNo);</span><br><span class="line">        <span class="comment">//保存上链数据到数据库</span></span><br><span class="line">        chainDataDao.save(tChainData);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//上链发送交易</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> <span class="string">&quot;http://&quot;</span> + ip + <span class="string">&quot;:8001/data/trade&quot;</span>;</span><br><span class="line">        restTemplate.postForEntity(url, tradeObject, TradeObject.class);</span><br><span class="line"></span><br><span class="line">        jo.setCode(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">        jo.setMsg(<span class="string">&quot;提交交易成功&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ResponseEntity</span>&lt;JSONObject&gt;(jo, HttpStatus.OK);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="四、实验结果"><a href="#四、实验结果" class="headerlink" title="四、实验结果"></a>四、实验结果</h2><ol>
+<li><p>新增产品、新增溯源码、新增流程、下载图片、扫描溯源码、对产品进行溯源</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103233624269.png" alt="image-20241103233624269"></p>
+</li>
+<li><p>利用开发者工具进行跟踪</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241103220100980.png" alt="image-20241103220100980" style="zoom:50%;" /></p>
+</li>
+<li><p>navicat连接block_chain.db查看数据上链信息</p>
+<p><img data-src="E:\Git\MyBlog\source\_drafts\溯源项目实战.assets\image-20241102165428448.png" alt="image-20241102165428448" style="zoom:50%;" /></p>
+</li>
+</ol>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><ol>
+<li><p>关于溯源码扫描查看流程进行溯源，需要手机和电脑在同一网络下才能扫码查看，或者直接电脑扫描查看。</p>
+</li>
+<li><p>如果想重置区块链需要把所有节点项目的db和ws删除，仅删除一个节点的db和ws是无效的，一旦开启，两个对等节点会完成数据的对等共享，必须删除所有节点项目的相关内容。</p>
+</li>
+<li><p>本次实验启动溯源项目节点，启动引导节点、两个block_contract节点【两个分节点开始挖矿starMining】（至少两个节点，否则不能通过验证）。出现点击了“提交”新建流程，但是不显示新建成功的，应该是有节点没有开启；具体情况可以根据进入开发者工具进行查看分析。</p>
+</li>
+<li><p>t_code表中img_url即溯源码对应的链接，对应generateQRCode生成二维码的接口，对应前端溯源码下载图片；后通过草料二维码工具，对产品信息进行溯源。</p>
+</li>
+<li><p>springboot项目的安全性：【dao层、service层和controller层】</p>
+<ul>
+<li><p>model层也叫<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=pojo&amp;spm=1001.2101.3001.7020">pojo</a>层或者entity层。一般数据库的一张表对应一个pojo层，并且表中所有字段都在pojo层都一一对应。</p>
+</li>
+<li><p>dao层也叫mapper层，数据持久层。对数据库进行持久化操作，他的方法是针对数据库操作的，基本用到的就是增删改查。它只是个接口，只有方法名字，具体实现在mapper.xml中。</p>
+</li>
+<li><p>service层叫业务逻辑层，存放业务逻辑处理，不直接对数据库进行操作，有接口和接口实现类，提供controller层调用的方法。创建两个文件，一个存放接口类，一个存放接口实现类。</p>
+</li>
+<li><p>controller层叫控制器层，负责前后端交互，接受前端请求，调用service层，接收service层返回的数据，最后返回具体的页面和数据到客户端。同样，也需要两个文件，接口类和接口实现类。</p>
+</li>
+</ul>
+<blockquote>
+<p>①想要访问数据库并且操作，只能通过dao层向数据库发送sql语句，将这些结果通过接口传给service层。<br>②想要处理数据，要先向dao层请求数据，对dao层传过来的数据进行加工处理，将这些处理好的数据通过接口传给controller层。<br>③客户想要查询或修改数据时，要先向service层请求数据，收集service层传过来的数据，将这些数据通过接口显示给客户，一般通过html等方法给客户。</p>
+</blockquote>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+
+<div>
+  
+    
+<div>
+    
+        <div style="text-align:center;font-size:14px;">-------------本文结束感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+        <div class="reward-container">
+  <div>情不知从所起，一往而深！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Likt 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Likt
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://likt11.github.io/2025/01/12/%E6%BA%AF%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" title="溯源项目实战">http://likt11.github.io/2025/01/12/溯源项目实战/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/01/12/pytorch%E5%AE%89%E8%A3%85/" rel="prev" title="pytorch安装">
+      <i class="fa fa-chevron-left"></i> pytorch安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%BA%94%EF%BC%9A%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E4%BA%A4%E6%98%93%EF%BC%8C%E4%BA%86%E8%A7%A3%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next" title="区块链实训五：了解区块链中的交易，了解智能合约的使用">
+      区块链实训五：了解区块链中的交易，了解智能合约的使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E8%AE%AD%E6%8A%A5%E5%91%8A%E5%85%AD"><span class="nav-number">1.</span> <span class="nav-text">实训报告六</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E7%9B%AE%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">一、实验目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">二、实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.3.</span> <span class="nav-text">三、实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%EF%BC%89%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF"><span class="nav-number">1.3.1.</span> <span class="nav-text">一）项目背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%EF%BC%89%E5%8C%BA%E5%9D%97%E9%93%BE%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">1.3.2.</span> <span class="nav-text">二）区块链的作用与局限性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%EF%BC%89%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.3.3.</span> <span class="nav-text">三）项目需求分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%EF%BC%89%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">1.3.4.</span> <span class="nav-text">四）技术选型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%EF%BC%89%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.5.</span> <span class="nav-text">五）代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%B9%E5%BA%94%E7%9A%84-Mapper-xml%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">找到数据库对应的*Mapper.xml文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E9%A9%BC%E5%B3%B0%E5%91%BD%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">开启驼峰命名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%EF%BC%8C%E9%9C%80%E8%A6%81%E5%BC%95%E5%85%A5spring-boot-starter-thymeleaf%E5%8C%85%E6%89%8D%E8%83%BD%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">开启模板引擎，需要引入spring-boot-starter-thymeleaf包才能使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">4.1.</span> <span class="nav-text">四、实验结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">4.2.</span> <span class="nav-text">五、总结</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Likt"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Likt</p>
+  <div class="site-description" itemprop="description">请你务必，一而再，再而三，三而不竭，千次万次，毫不犹豫地救自己于这世间水火。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Likt</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("05/08/2024 10:11:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : '5CGDgZL88OYzRNYj1PLjmcBc-gzGzoHsz',
+      appKey     : 'N0AqOmhJqbysjAOoqieRu6Jv',
+      placeholder: "期待与您的交流！",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #4D4D4C;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #F7F7F7;
+      background-image: linear-gradient(#F7F7F7, #F7F7F7);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('post.copy_button').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('post.copy_success')
+          else $(this).text('post.copy_failure')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('post.copy_button')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script></body>
+</html>
