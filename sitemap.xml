@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://likt11.github.io/2024/09/20/vmware-tools%E5%AE%89%E8%A3%85/</loc>
+    
+    <lastmod>2025-01-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://likt11.github.io/2025/01/12/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%9E%E8%AE%AD%E4%BA%94%EF%BC%9A%E4%BA%86%E8%A7%A3%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E4%BA%A4%E6%98%93%EF%BC%8C%E4%BA%86%E8%A7%A3%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2025-01-12</lastmod>
@@ -57,15 +66,6 @@
   
   <url>
     <loc>http://likt11.github.io/2024/09/22/netcat%E6%AD%A3%E5%90%91%E5%92%8C%E5%8F%8D%E5%90%91shell/</loc>
-    
-    <lastmod>2024-10-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://likt11.github.io/2024/09/20/vmware-tools%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2024-10-16</lastmod>
     
@@ -412,6 +412,13 @@
   
   <url>
     <loc>http://likt11.github.io/tags/python/</loc>
+    <lastmod>2025-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://likt11.github.io/tags/VMware%E8%99%9A%E6%8B%9F%E6%9C%BA/</loc>
     <lastmod>2025-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
